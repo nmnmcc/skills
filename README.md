@@ -1,29 +1,54 @@
-# Engineering Work Skills
+# Agent Work Skills
 
-This repository has three engineering skills that can work alone or together. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
+This repository has four skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
 
-They give three ways to make doubt smaller in engineering work. Choose by where you must reason about correctness and prove it, not by work size or file count:
+## Skills
 
-- `point` follows cause and effect: What is the smallest part that makes the result, and what check can show if this answer is right or wrong?
+### Default action
+
+- `just-do-it` turns clear intent into joyful, responsible action. Use it in any scenario and at every stage to keep work moving toward a finished result.
+
+### Engineering views
+
+Choose the smallest view that can set and prove correctness. Choose by where you must reason, not by work size or file count:
+
+- `point` follows cause and effect: What is the smallest part that makes the result, and what check can show whether the answer is right or wrong?
 - `line` starts from one shared rule: What must be true across one technical domain, and where can parts move away from it?
 - `plane` follows the full path: Can meaning and guarantees pass through every boundary and every old-and-new release state?
 
-Use the smallest view that can set and prove correctness. Use the views together inside one process, not as repeated work. Plane sets the end result. Line keeps shared rules true. Point finds local causes.
+Use `just-do-it` as the default working mindset and add the relevant engineering view when needed. Use the views together inside one process, not as repeated work: plane sets the end result, line keeps shared rules true, and point finds local causes.
 
 ## Structure
 
 ```text
 .
 |-- skills/
+|   |-- just-do-it/
 |   |-- point/
-|   |   `-- SKILL.md
 |   |-- line/
-|   |   `-- SKILL.md
 |   `-- plane/
-|       `-- SKILL.md
 |-- devenv.nix
 |-- pyproject.toml
 `-- skills.sh.json
+```
+
+Each skill directory contains its instructions in `SKILL.md` and UI metadata in `agents/openai.yaml`.
+
+## Install
+
+Install every skill:
+
+```bash
+npx skills add nmnmcc/skills
+```
+
+Install one skill:
+
+```bash
+npx skills add nmnmcc/skills --skill just-do-it
+npx skills add nmnmcc/skills --skill point
+npx skills add nmnmcc/skills --skill line
+npx skills add nmnmcc/skills --skill plane
 ```
 
 ## Validate
@@ -40,7 +65,7 @@ If you use direnv, approve the included `.envrc` once:
 direnv allow
 ```
 
-Run the official Agent Skills validation and GitHub Actions checks used by CI:
+Run the same validation used by CI:
 
 ```bash
 devenv test
@@ -58,17 +83,6 @@ List the skills found by the official CLI:
 npx skills add . --list
 ```
 
-## Install
-
-After publishing the repository to GitHub, install all skills or one skill:
-
-```bash
-npx skills add nmnmcc/skills
-npx skills add nmnmcc/skills --skill point
-npx skills add nmnmcc/skills --skill line
-npx skills add nmnmcc/skills --skill plane
-```
-
 ## Writing rules
 
 - Put each skill in `skills/<skill-name>/` with a `SKILL.md` file.
@@ -83,8 +97,8 @@ npx skills add nmnmcc/skills --skill plane
 ## Release checks
 
 - `devenv test` passes with the official `skills-ref` validator.
-- `npx skills add . --list` finds all three skills.
-- `skills.sh.json` is valid and lists real skill names.
+- `npx skills add . --list` finds all four skills.
+- `skills.sh.json` is valid and lists all four skill names once.
 - The install commands use the published repository name.
 
 ## License

@@ -3,8 +3,13 @@
   "notGrouped": "bottom",
   "groupings": [
     {
-      "title": "Ways to Think About Engineering Work",
-      "description": "Three ways to find a local cause, keep one shared rule, and make a full path work.",
+      "title": "Default Action",
+      "description": "A joyful default for turning clear intent into responsible action and a finished result.",
+      "skills": ["just-do-it"]
+    },
+    {
+      "title": "Engineering Views",
+      "description": "Three views for finding a local cause, keeping one shared rule, and making a full path work.",
       "skills": ["point", "line", "plane"]
     }
   ]
