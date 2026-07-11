@@ -1,4 +1,4 @@
-name: Validate skills
+name: Validate
 
 on:
   push:
@@ -11,8 +11,12 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: cachix/install-nix-action@v31
+      - uses: cachix/cachix-action@v16
         with:
-          node-version: 22
-      - run: npm test
+          name: devenv
+      - name: Install Devenv
+        run: nix profile add nixpkgs#devenv
+      - name: Test the development environment
+        run: devenv test

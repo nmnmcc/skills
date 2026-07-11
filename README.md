@@ -19,17 +19,35 @@ The skills can be used alone or together.
 |   |   `-- SKILL.md
 |   `-- plane/
 |       `-- SKILL.md
-|-- scripts/
-|   `-- validate-skills.mjs
+|-- devenv.nix
+|-- pyproject.toml
 `-- skills.sh.json
 ```
 
 ## Validate
 
-Run the repository checks:
+Install [Devenv](https://devenv.sh/getting-started/), then enter the development environment:
 
 ```bash
-npm test
+devenv shell
+```
+
+If you use direnv, approve the included `.envrc` once:
+
+```bash
+direnv allow
+```
+
+Run the official Agent Skills validation and GitHub Actions checks used by CI:
+
+```bash
+devenv test
+```
+
+Inside the development environment, run the checks directly with:
+
+```bash
+validate
 ```
 
 List the skills found by the official CLI:
@@ -56,13 +74,13 @@ npx skills add nmnmcc/skills --skill plane
 - Keep the directory name and skill name the same.
 - Explain what the skill does and when to use it in `description`.
 - Write direct instructions for the agent.
-- Put long reference material in `references/`.
-- Put stable, repeated operations in `scripts/`.
+- Put long reference material in a skill's `references/` directory.
+- Put stable, repeated operations in a skill's `scripts/` directory.
 - Do not commit secrets, tokens, personal data, or untrusted programs.
 
 ## Release checks
 
-- `npm test` passes.
+- `devenv test` passes with the official `skills-ref` validator.
 - `npx skills add . --list` finds all three skills.
 - `skills.sh.json` is valid and lists real skill names.
 - The install commands use the published repository name.

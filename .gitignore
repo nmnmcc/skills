@@ -1,5 +1,11 @@
 .DS_Store
+.devenv/
+.direnv/
 .env
 .env.*
-node_modules/
+.venv/
+__pycache__/
+*.pyc
+devenv.local.nix
+devenv.local.yaml
 *.log

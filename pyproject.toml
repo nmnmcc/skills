@@ -1,0 +1,11 @@
+[project]
+name = "engineering-work-skills"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = ["skills-ref"]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+skills-ref = { git = "https://github.com/agentskills/agentskills.git", rev = "38a2ff82958afee88dadf4831509e6f7e9d8ef4e", subdirectory = "skills-ref" }
