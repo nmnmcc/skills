@@ -57,7 +57,7 @@ for (const file of skillFiles) {
   }
   if (name && name.length > 64) errors.push(`${displayPath}: name exceeds 64 characters.`);
   if (description && (description.length < 20 || description.length > 1024)) {
-    errors.push(`${displayPath}: description must contain 20–1024 characters.`);
+    errors.push(`${displayPath}: description must contain 20-1024 characters.`);
   }
   if (name && basename(dirname(file)) !== name) {
     errors.push(`${displayPath}: parent directory must match name (${name}).`);

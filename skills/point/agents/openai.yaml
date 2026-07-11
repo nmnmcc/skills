@@ -1,0 +1,4 @@
+interface:
+  display_name: "Point"
+  short_description: "Complete one small, focused engineering change."
+  default_prompt: "Use $point to complete this bounded engineering change with focused validation."

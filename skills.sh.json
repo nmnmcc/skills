@@ -3,9 +3,9 @@
   "notGrouped": "bottom",
   "groupings": [
     {
-      "title": "Examples",
-      "description": "Starter skills to copy and customize.",
-      "skills": ["example-skill"]
+      "title": "Engineering Work Topologies",
+      "description": "Composable protocols for focused, domain-wide, and cross-domain engineering work.",
+      "skills": ["point", "line", "plane"]
     }
   ]
 }
