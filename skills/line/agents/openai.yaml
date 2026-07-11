@@ -1,4 +1,4 @@
 interface:
   display_name: "Line"
-  short_description: "Keep changes consistent within one technical domain."
-  default_prompt: "Use $line to make this domain-wide engineering change consistently."
+  short_description: "Make one rule hold in every part of a domain."
+  default_prompt: "Use $line to set one rule and make every affected part of this technical domain follow it."

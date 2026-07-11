@@ -1,12 +1,14 @@
 # Engineering Work Skills
 
-This repository contains three composable engineering skills. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
+This repository has three engineering skills that can work alone or together. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
 
-- `point` completes one small, focused change.
-- `line` keeps broad changes consistent within one technical domain.
-- `plane` delivers one complete outcome across technical domains.
+They give three ways to make doubt smaller in engineering work. Choose by where you must reason about correctness and prove it, not by work size or file count:
 
-The skills can be used alone or together.
+- `point` follows cause and effect: What is the smallest part that makes the result, and what check can show if this answer is right or wrong?
+- `line` starts from one shared rule: What must be true across one technical domain, and where can parts move away from it?
+- `plane` follows the full path: Can meaning and guarantees pass through every boundary and every old-and-new release state?
+
+Use the smallest view that can set and prove correctness. Use the views together inside one process, not as repeated work. Plane sets the end result. Line keeps shared rules true. Point finds local causes.
 
 ## Structure
 

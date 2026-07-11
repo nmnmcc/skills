@@ -3,8 +3,8 @@
   "notGrouped": "bottom",
   "groupings": [
     {
-      "title": "Engineering Work Topologies",
-      "description": "Composable protocols for focused, domain-wide, and cross-domain engineering work.",
+      "title": "Ways to Think About Engineering Work",
+      "description": "Three ways to find a local cause, keep one shared rule, and make a full path work.",
       "skills": ["point", "line", "plane"]
     }
   ]
