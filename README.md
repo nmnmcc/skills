@@ -1,6 +1,6 @@
 # Agent Work Skills
 
-This repository has four skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
+This repository has five skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
 
 ## Skills
 
@@ -18,6 +18,12 @@ Choose the smallest view that can set and prove correctness. Choose by where you
 
 Use `just-do-it` as the default working mindset and add the relevant engineering view when needed. Use the views together inside one process, not as repeated work: plane sets the end result, line keeps shared rules true, and point finds local causes.
 
+### Engineering domains
+
+- `typesafe` builds type safety into each TypeScript change. It keeps meaning, runtime value, static type, data form, proof, and allowed operations in agreement. It then keeps each type guarantee safe from its source to its final use.
+
+Use `typesafe` with `just-do-it` and the needed engineering view. `typesafe` gives the TypeScript rules. `point`, `line`, or `plane` gives the shape of the work.
+
 ## Structure
 
 ```text
@@ -26,7 +32,8 @@ Use `just-do-it` as the default working mindset and add the relevant engineering
 |   |-- just-do-it/
 |   |-- point/
 |   |-- line/
-|   `-- plane/
+|   |-- plane/
+|   `-- typesafe/
 |-- devenv.nix
 |-- pyproject.toml
 `-- skills.sh.json
@@ -49,6 +56,7 @@ npx skills add nmnmcc/skills --skill just-do-it
 npx skills add nmnmcc/skills --skill point
 npx skills add nmnmcc/skills --skill line
 npx skills add nmnmcc/skills --skill plane
+npx skills add nmnmcc/skills --skill typesafe
 ```
 
 ## Validate
@@ -97,8 +105,8 @@ npx skills add . --list
 ## Release checks
 
 - `devenv test` passes with the official `skills-ref` validator.
-- `npx skills add . --list` finds all four skills.
-- `skills.sh.json` is valid and lists all four skill names once.
+- `npx skills add . --list` finds all five skills.
+- `skills.sh.json` is valid and lists all five skill names once.
 - The install commands use the published repository name.
 
 ## License

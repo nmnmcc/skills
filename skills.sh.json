@@ -11,6 +11,11 @@
       "title": "Engineering Views",
       "description": "Three views for finding a local cause, keeping one shared rule, and making a full path work.",
       "skills": ["point", "line", "plane"]
+    },
+    {
+      "title": "Engineering Domains",
+      "description": "Keep meaning, runtime values, static types, data forms, proof, and allowed operations in agreement from source to final use.",
+      "skills": ["typesafe"]
     }
   ]
 }
