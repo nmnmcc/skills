@@ -14,8 +14,8 @@
     },
     {
       "title": "Engineering Domains",
-      "description": "Keep meaning, runtime values, static types, data forms, proof, and allowed operations in agreement from source to final use.",
-      "skills": ["typesafe"]
+      "description": "Bring healthy judgment to all software work and keep TypeScript types safe from start to use.",
+      "skills": ["simplicity", "typesafe"]
     }
   ]
 }

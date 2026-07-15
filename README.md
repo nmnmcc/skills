@@ -1,6 +1,6 @@
 # Agent Work Skills
 
-This repository has five skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
+This repository has six skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
 
 ## Skills
 
@@ -20,9 +20,10 @@ Use `just-do-it` as the default working mindset and add the relevant engineering
 
 ### Engineering domains
 
+- `simplicity` is a basic part of healthy software judgment. It keeps developers close to the real problem, honest about hard parts, and able to spend complexity only where it buys enough strength for the whole system.
 - `typesafe` builds type safety into each TypeScript change. It keeps meaning, runtime value, static type, data form, proof, and allowed operations in agreement. It then keeps each type guarantee safe from its source to its final use.
 
-Use `typesafe` with `just-do-it` and the needed engineering view. `typesafe` gives the TypeScript rules. `point`, `line`, or `plane` gives the shape of the work.
+Use an engineering domain skill with `just-do-it` and the needed engineering view. The domain skill gives the specialized rules. `point`, `line`, or `plane` gives the shape of the work.
 
 ## Structure
 
@@ -33,6 +34,7 @@ Use `typesafe` with `just-do-it` and the needed engineering view. `typesafe` giv
 |   |-- point/
 |   |-- line/
 |   |-- plane/
+|   |-- simplicity/
 |   `-- typesafe/
 |-- devenv.nix
 |-- pyproject.toml
@@ -56,6 +58,7 @@ npx skills add nmnmcc/skills --skill just-do-it
 npx skills add nmnmcc/skills --skill point
 npx skills add nmnmcc/skills --skill line
 npx skills add nmnmcc/skills --skill plane
+npx skills add nmnmcc/skills --skill simplicity
 npx skills add nmnmcc/skills --skill typesafe
 ```
 
@@ -105,8 +108,8 @@ npx skills add . --list
 ## Release checks
 
 - `devenv test` passes with the official `skills-ref` validator.
-- `npx skills add . --list` finds all five skills.
-- `skills.sh.json` is valid and lists all five skill names once.
+- `npx skills add . --list` finds all six skills.
+- `skills.sh.json` is valid and lists all six skill names once.
 - The install commands use the published repository name.
 
 ## License
