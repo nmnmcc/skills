@@ -1,12 +1,16 @@
 # Agent Work Skills
 
-This repository has six skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
+This repository has seven skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
 
 ## Skills
 
 ### Default action
 
 - `just-do-it` turns clear intent into joyful, responsible action. Use it in any scenario and at every stage to keep work moving toward a finished result.
+
+### Product experience
+
+- `ux` begins with one simple act: imagine that you are the user. It follows the whole journey and improves everything the user can notice, use, wait for, or live with, while taking out parts that do not help.
 
 ### Engineering views
 
@@ -31,6 +35,7 @@ Use an engineering domain skill with `just-do-it` and the needed engineering vie
 .
 |-- skills/
 |   |-- just-do-it/
+|   |-- ux/
 |   |-- point/
 |   |-- line/
 |   |-- plane/
@@ -55,6 +60,7 @@ Install one skill:
 
 ```bash
 npx skills add nmnmcc/skills --skill just-do-it
+npx skills add nmnmcc/skills --skill ux
 npx skills add nmnmcc/skills --skill point
 npx skills add nmnmcc/skills --skill line
 npx skills add nmnmcc/skills --skill plane
@@ -101,6 +107,7 @@ npx skills add . --list
 - Keep the directory name and skill name the same.
 - Explain what the skill does and when to use it in `description`.
 - Write direct instructions for the agent.
+- Use [Basic English](https://en.wikipedia.org/wiki/Basic_English) as far as it stays clear. Prefer short, common words and simple grammar. Keep needed technical terms and explain them with simple words.
 - Put long reference material in a skill's `references/` directory.
 - Put stable, repeated operations in a skill's `scripts/` directory.
 - Do not commit secrets, tokens, personal data, or untrusted programs.
@@ -108,8 +115,8 @@ npx skills add . --list
 ## Release checks
 
 - `devenv test` passes with the official `skills-ref` validator.
-- `npx skills add . --list` finds all six skills.
-- `skills.sh.json` is valid and lists all six skill names once.
+- `npx skills add . --list` finds all seven skills.
+- `skills.sh.json` is valid and lists all seven skill names once.
 - The install commands use the published repository name.
 
 ## License

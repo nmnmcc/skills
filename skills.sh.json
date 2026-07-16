@@ -8,6 +8,11 @@
       "skills": ["just-do-it"]
     },
     {
+      "title": "Product Experience",
+      "description": "Imagine you are the user and improve every part they can notice, use, wait for, or live with.",
+      "skills": ["ux"]
+    },
+    {
       "title": "Engineering Views",
       "description": "Three views for finding a local cause, keeping one shared rule, and making a full path work.",
       "skills": ["point", "line", "plane"]
