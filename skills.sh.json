@@ -3,6 +3,11 @@
   "notGrouped": "bottom",
   "groupings": [
     {
+      "title": "Default Study",
+      "description": "Study the real situation deeply before any answer, decision, or action.",
+      "skills": ["study"]
+    },
+    {
       "title": "Default Action",
       "description": "A joyful default for turning clear intent into responsible action and a finished result.",
       "skills": ["just-do-it"]

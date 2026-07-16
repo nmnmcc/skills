@@ -1,12 +1,18 @@
 # Agent Work Skills
 
-This repository has seven skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
+This repository has eight skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
 
 ## Skills
+
+### Default study
+
+- `study` starts with one working attitude: study deeply before anything. It learns the real object, context, evidence, alternatives, and risks before answering or acting, then keeps learning from the result.
 
 ### Default action
 
 - `just-do-it` turns clear intent into joyful, responsible action. Use it in any scenario and at every stage to keep work moving toward a finished result.
+
+Use them as one loop: study deeply enough to earn the next move, act when it is clear and safe enough, and study what the result teaches.
 
 ### Product experience
 
@@ -20,20 +26,21 @@ Choose the smallest view that can set and prove correctness. Choose by where you
 - `line` starts from one shared rule: What must be true across one technical domain, and where can parts move away from it?
 - `plane` follows the full path: Can meaning and guarantees pass through every boundary and every old-and-new release state?
 
-Use `just-do-it` as the default working mindset and add the relevant engineering view when needed. Use the views together inside one process, not as repeated work: plane sets the end result, line keeps shared rules true, and point finds local causes.
+Use `study` first to learn the real system and choose the relevant engineering view. Use `just-do-it` to keep the work moving. Use the views together inside one process, not as repeated work: plane sets the end result, line keeps shared rules true, and point finds local causes.
 
 ### Engineering domains
 
 - `simplicity` is a basic part of healthy software judgment. It keeps developers close to the real problem, honest about hard parts, and able to spend complexity only where it buys enough strength for the whole system.
 - `typesafe` builds type safety into each TypeScript change. It keeps meaning, runtime value, static type, data form, proof, and allowed operations in agreement. It then keeps each type guarantee safe from its source to its final use.
 
-Use an engineering domain skill with `just-do-it` and the needed engineering view. The domain skill gives the specialized rules. `point`, `line`, or `plane` gives the shape of the work.
+Use an engineering domain skill with `study`, `just-do-it`, and the needed engineering view. Study learns the real situation, the domain skill gives the specialized rules, and `point`, `line`, or `plane` gives the shape of the work.
 
 ## Structure
 
 ```text
 .
 |-- skills/
+|   |-- study/
 |   |-- just-do-it/
 |   |-- ux/
 |   |-- point/
@@ -59,6 +66,7 @@ npx skills add nmnmcc/skills
 Install one skill:
 
 ```bash
+npx skills add nmnmcc/skills --skill study
 npx skills add nmnmcc/skills --skill just-do-it
 npx skills add nmnmcc/skills --skill ux
 npx skills add nmnmcc/skills --skill point
@@ -115,8 +123,8 @@ npx skills add . --list
 ## Release checks
 
 - `devenv test` passes with the official `skills-ref` validator.
-- `npx skills add . --list` finds all seven skills.
-- `skills.sh.json` is valid and lists all seven skill names once.
+- `npx skills add . --list` finds all eight skills.
+- `skills.sh.json` is valid and lists all eight skill names once.
 - The install commands use the published repository name.
 
 ## License

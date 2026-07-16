@@ -1,0 +1,4 @@
+interface:
+  display_name: "Study"
+  short_description: "Study deeply before answering, deciding, or acting."
+  default_prompt: "Use $study to study the real situation deeply before you answer, decide, or act."
