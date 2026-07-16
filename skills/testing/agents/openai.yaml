@@ -1,0 +1,4 @@
+interface:
+  display_name: "Testing"
+  short_description: "Prove what you can, then test what is still at risk."
+  default_prompt: "Use $testing to prove what can be proved, then write clear tests for the important risk that is left."

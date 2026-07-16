@@ -24,8 +24,8 @@
     },
     {
       "title": "Engineering Domains",
-      "description": "Bring healthy judgment to all software work and keep TypeScript types safe from start to use.",
-      "skills": ["simplicity", "typesafe"]
+      "description": "Keep software simple, prove every rule you can, and test the important risk that is left.",
+      "skills": ["simplicity", "typesafe", "testing"]
     }
   ]
 }
