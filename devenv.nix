@@ -5,7 +5,7 @@
 
   env.UV_DEFAULT_INDEX = "https://pypi.org/simple";
 
-  packages = [ pkgs.actionlint ];
+  packages = [ pkgs.actionlint pkgs.git ];
 
   languages.python = {
     enable = true;
