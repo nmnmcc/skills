@@ -1,6 +1,6 @@
 # Agent Work Skills
 
-This repository has ten skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
+This repository has eleven skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
 
 ## Skills
 
@@ -17,6 +17,10 @@ Use them as one loop: study deeply enough to earn the next move, act when it is 
 ### Product experience
 
 - `ux` begins with one simple act: imagine that you are the user. It follows the whole journey and improves everything the user can notice, use, wait for, or live with, while taking out parts that do not help.
+
+### Developer experience
+
+- `dx` treats developers as users. It reads a project as a person does, from purpose and system map through a real path to local code, then makes meaning easy to see, intended changes easy to make, and results easy to trust.
 
 ### Engineering views
 
@@ -45,6 +49,7 @@ Use an engineering domain skill with `study`, `just-do-it`, and the needed engin
 |   |-- study/
 |   |-- just-do-it/
 |   |-- ux/
+|   |-- dx/
 |   |-- point/
 |   |-- line/
 |   |-- plane/
@@ -73,6 +78,7 @@ Install one skill:
 npx skills add nmnmcc/skills --skill study
 npx skills add nmnmcc/skills --skill just-do-it
 npx skills add nmnmcc/skills --skill ux
+npx skills add nmnmcc/skills --skill dx
 npx skills add nmnmcc/skills --skill point
 npx skills add nmnmcc/skills --skill line
 npx skills add nmnmcc/skills --skill plane
@@ -129,8 +135,8 @@ npx skills add . --list
 ## Release checks
 
 - `devenv test` passes with the official `skills-ref` validator.
-- `npx skills add . --list` finds all ten skills.
-- `skills.sh.json` is valid and lists all ten skill names once.
+- `npx skills add . --list` finds all eleven skills.
+- `skills.sh.json` is valid and lists all eleven skill names once.
 - The install commands use the published repository name.
 
 ## License

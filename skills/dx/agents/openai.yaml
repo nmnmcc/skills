@@ -1,0 +1,4 @@
+interface:
+  display_name: "DX"
+  short_description: "Read whole to detail and make development pleasant."
+  default_prompt: "Use $dx to read this project as a human would, from whole to detail, then make it clear, coherent, pleasant to change, and easy to trust."

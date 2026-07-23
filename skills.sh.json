@@ -18,6 +18,11 @@
       "skills": ["ux"]
     },
     {
+      "title": "Developer Experience",
+      "description": "Read projects from whole to detail and make the full development journey clear, pleasant, and easy to trust.",
+      "skills": ["dx"]
+    },
+    {
       "title": "Engineering Views",
       "description": "Three views for finding a local cause, keeping one shared rule, and making a full path work.",
       "skills": ["point", "line", "plane"]
