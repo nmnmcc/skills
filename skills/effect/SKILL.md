@@ -1,6 +1,6 @@
 ---
 name: effect
-description: "Use effect-aware thinking whenever designing, writing, changing, reviewing, or debugging code. Make observable work, dependencies, failures, state changes, resource lifetimes, concurrency, cancellation, and execution boundaries explicit. Follow the project's existing language and tools, learn the exact public API when a library is involved, keep meaning intact from design through execution, and verify the real behavior without forcing a new effect system."
+description: "Use effect-aware thinking whenever designing, writing, changing, reviewing, or debugging code. Make observable work, dependencies, failures, state changes, resource lifetimes, concurrency, cancellation, and execution boundaries explicit. Follow the project's existing tools, use the matching guide for Effect or ZIO, learn the exact public API when a library is involved, keep meaning intact from design through execution, and verify the real behavior. When an effect system owns the work, keep every supported capability inside it and require the user's explicit approval before any unavoidable non-effectful escape hatch."
 ---
 
 # Effect
@@ -26,6 +26,23 @@ Start from the meaning of the work. Ask:
 
 Keep plain calculations plain. Keep effects clear where they enter, compose, and run.
 
+## Keep work inside the effect system
+
+When an explicit effect system owns a part of the program, use it for every behavior and integration that it can express. Build in the system from the start instead of first controlling the work with host-language effects and wrapping it later. A pure value or calculation may remain plain only when it owns no effect, resource, lifetime, or running work.
+
+An **escape hatch** is any direct host-language, foreign-library, runtime, or unsafe operation that bypasses the effect system and must be adapted back into it. Treat an escape hatch as a last resort, not a convenience.
+
+Before adding, expanding, or relying on an escape hatch:
+
+1. Search the exact installed system's public API, source, tests, and project patterns for an effect-native construction.
+2. Show why every relevant effect-native path cannot meet the real requirement.
+3. State the smallest proposed boundary, its contract, and its risks for errors, defects, cancellation, resources, concurrency, and observability.
+4. Ask the user for explicit approval of that specific boundary and reason.
+
+Do not treat silence, a broad request to finish the task, an existing dependency, or approval of another boundary as consent. Without explicit approval, do not implement the escape hatch; report the blocked choice and keep the effect-native work complete.
+
+If the user approves it, isolate the smallest adapter, expose its full contract, restore the effect-system model immediately, and verify every outcome. Never let raw control flow, errors, resources, tasks, or unsafe values leak beyond that boundary.
+
 ## Learn the effect model in front of you
 
 Treat the project and its matching sources as the truth. Do not force a remembered pattern onto a different language, library, or codebase.
@@ -43,6 +60,15 @@ If the project has no effect library, use its normal language and framework tool
 
 If exact source cannot be reached, say what evidence is available and what remains uncertain. Do not hide the gap with a fixed recipe.
 
+## Load the matching library guide
+
+Read the guide for the library that owns the work before choosing APIs:
+
+- For the TypeScript `effect` package or `@effect/*` modules, read [Effect](references/effect.md) completely.
+- For Scala ZIO and its modules, read [ZIO](references/zio.md) completely.
+
+Load only the guide that applies to the current part. If different parts use both libraries, apply each guide only at the boundary it owns. For another effect system, follow this main workflow and inspect that system's exact public sources instead of treating either guide as a fixed recipe.
+
 ## Carry the model through the whole workflow
 
 Use one effect model from the first question to the final proof:
@@ -56,7 +82,7 @@ Use one effect model from the first question to the final proof:
 7. Verify static guarantees where they exist, then test the runtime behavior and final result.
 8. Teach the small part of the model that makes the solution reusable.
 
-Do not build important effects in hidden control flow and label them only after the fact. When code meets a host, framework, or third-party API, keep that contact narrow and bring its result, failure, and lifetime back into the program's visible model at once.
+Do not build important effects in hidden control flow and label them only after the fact. Use an effect-native adapter when one exists. If non-effectful host, framework, or third-party contact is unavoidable, apply the escape-hatch approval rule, keep the approved contact narrow, and bring its result, failure, and lifetime back into the program's visible model at once.
 
 ## Keep the important facts visible
 
@@ -75,7 +101,7 @@ Use the strongest clear form the project already supports:
 - When the type system can carry requirements, results, or failures, keep those links in the types.
 - When the language uses exceptions, callbacks, asynchronous control flow, context, or protocols, make their contract and ownership clear at the interface.
 - When checks happen at runtime, validate at the boundary and make each possible outcome visible to later code.
-- When direct imperative code is the clearest fit, isolate the effect and keep its inputs, outputs, failure, and cleanup explicit. Do not wrap it in machinery that adds no useful guarantee.
+- When no explicit effect system owns the part and direct imperative code is the clearest fit, isolate the effect and keep its inputs, outputs, failure, and cleanup explicit. Do not wrap it in machinery that adds no useful guarantee.
 
 No one style is always right. Judge the form by whether it keeps the needed meaning visible and makes correct composition, execution, testing, and repair easier.
 

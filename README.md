@@ -32,7 +32,7 @@ Use `study` first to learn the real system and choose the relevant engineering v
 
 - `simplicity` is a basic part of healthy software judgment. It keeps developers close to the real problem, honest about hard parts, and able to spend complexity only where it buys enough strength for the whole system.
 - `typesafe` keeps meaning, runtime value, type or contract, data form, proof, and allowed operations in agreement. It matches every guarantee to the checks that support it, then keeps that guarantee safe from its source to its final use.
-- `effect` makes observable work, dependencies, failures, resources, and execution boundaries explicit. It follows the project's existing tools and keeps the same model from the first design question through the final proof.
+- `effect` makes observable work, dependencies, failures, resources, and execution boundaries explicit. It keeps supported work inside the project's effect system and requires explicit user approval before an unavoidable non-effectful escape hatch.
 - `testing` proves every rule it can, then writes clear tests for important risk where proof ends. A test fills a gap in proof; it does not take the place of proof.
 
 Use an engineering domain skill with `study`, `just-do-it`, and the needed engineering view. Study learns the real situation, the domain skill gives the specialized rules, and `point`, `line`, or `plane` gives the shape of the work.
