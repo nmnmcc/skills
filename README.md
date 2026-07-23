@@ -31,8 +31,8 @@ Use `study` first to learn the real system and choose the relevant engineering v
 ### Engineering domains
 
 - `simplicity` is a basic part of healthy software judgment. It keeps developers close to the real problem, honest about hard parts, and able to spend complexity only where it buys enough strength for the whole system.
-- `typesafe` builds type safety into each TypeScript change. It keeps meaning, runtime value, static type, data form, proof, and allowed operations in agreement. It then keeps each type guarantee safe from its source to its final use.
-- `effect` treats Effect as the language of the whole program, not a bag of helpers. It learns that language from the exact source in use and keeps the same model from the first design question through the final proof.
+- `typesafe` keeps meaning, runtime value, type or contract, data form, proof, and allowed operations in agreement. It matches every guarantee to the checks that support it, then keeps that guarantee safe from its source to its final use.
+- `effect` makes observable work, dependencies, failures, resources, and execution boundaries explicit. It follows the project's existing tools and keeps the same model from the first design question through the final proof.
 - `testing` proves every rule it can, then writes clear tests for important risk where proof ends. A test fills a gap in proof; it does not take the place of proof.
 
 Use an engineering domain skill with `study`, `just-do-it`, and the needed engineering view. Study learns the real situation, the domain skill gives the specialized rules, and `point`, `line`, or `plane` gives the shape of the work.

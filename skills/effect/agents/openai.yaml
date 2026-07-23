@@ -1,4 +1,4 @@
 interface:
   display_name: "Effect"
-  short_description: "Think in Effect and learn its exact API from source."
-  default_prompt: "Use $effect to think in Effect throughout this work, learn the project's exact API from source, and keep the program's meaning intact end to end."
+  short_description: "Make effects and execution boundaries explicit."
+  default_prompt: "Use $effect to make effects, dependencies, failures, resources, and execution boundaries explicit while following the project's existing tools."
