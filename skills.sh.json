@@ -29,8 +29,8 @@
     },
     {
       "title": "Engineering Domains",
-      "description": "Keep software simple and type-safe, make effects explicit through the whole program, prove every rule you can, and test the important risk that is left.",
-      "skills": ["simplicity", "typesafe", "effect", "testing"]
+      "description": "Keep software simple and type-safe, make effects explicit, prove correctness and optimality beside production code, and test the important risk that is left.",
+      "skills": ["simplicity", "typesafe", "effect", "proof", "testing"]
     }
   ]
 }

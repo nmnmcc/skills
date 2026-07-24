@@ -1,0 +1,4 @@
+interface:
+  display_name: "Proof"
+  short_description: "Prove correctness and optimality beside code."
+  default_prompt: "Use $proof to prove each production implementation correct and prove that no strictly better correct alternative exists."

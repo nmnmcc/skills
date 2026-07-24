@@ -1,6 +1,6 @@
 # Agent Work Skills
 
-This repository has eleven skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
+This repository has twelve skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
 
 ## Skills
 
@@ -37,6 +37,7 @@ Use `study` first to learn the real system and choose the relevant engineering v
 - `simplicity` is a basic part of healthy software judgment. It keeps developers close to the real problem, honest about hard parts, and able to spend complexity only where it buys enough strength for the whole system.
 - `typesafe` keeps meaning, runtime value, type or contract, data form, proof, and allowed operations in agreement. It matches every guarantee to the checks that support it, then keeps that guarantee safe from its source to its final use.
 - `effect` makes observable work, dependencies, failures, resources, and execution boundaries explicit. It keeps supported work inside the project's effect system and requires explicit user approval before an unavoidable non-effectful escape hatch.
+- `proof` writes human-checkable, mathematical-style proofs beside every first-party production function and module. It proves correctness first, then proves that no strictly better correct implementation exists in the complete stated solution space, from local choices such as binding versus inlining through whole-system design.
 - `testing` proves every rule it can, then writes clear tests for important risk where proof ends. A test fills a gap in proof; it does not take the place of proof.
 
 Use an engineering domain skill with `study`, `just-do-it`, and the needed engineering view. Study learns the real situation, the domain skill gives the specialized rules, and `point`, `line`, or `plane` gives the shape of the work.
@@ -56,6 +57,7 @@ Use an engineering domain skill with `study`, `just-do-it`, and the needed engin
 |   |-- simplicity/
 |   |-- typesafe/
 |   |-- effect/
+|   |-- proof/
 |   `-- testing/
 |-- devenv.nix
 |-- pyproject.toml
@@ -85,6 +87,7 @@ npx skills add nmnmcc/skills --skill plane
 npx skills add nmnmcc/skills --skill simplicity
 npx skills add nmnmcc/skills --skill typesafe
 npx skills add nmnmcc/skills --skill effect
+npx skills add nmnmcc/skills --skill proof
 npx skills add nmnmcc/skills --skill testing
 ```
 
@@ -135,8 +138,8 @@ npx skills add . --list
 ## Release checks
 
 - `devenv test` passes with the official `skills-ref` validator.
-- `npx skills add . --list` finds all eleven skills.
-- `skills.sh.json` is valid and lists all eleven skill names once.
+- `npx skills add . --list` finds all twelve skills.
+- `skills.sh.json` is valid and lists all twelve skill names once.
 - The install commands use the published repository name.
 
 ## License
