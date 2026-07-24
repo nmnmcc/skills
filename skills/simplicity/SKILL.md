@@ -1,6 +1,6 @@
 ---
 name: simplicity
-description: Keep software work simple and fit for its real need. Use when designing, writing, testing, fixing, reviewing, changing, explaining, or running software. Use it most when code has too many parts, layers, rules, or steps; when it is hard to understand or change; or when you must decide how much structure and protection from failure the work needs.
+description: Keep software work simple and fit for its real need. Use when designing, writing, testing, fixing, reviewing, changing, explaining, or running software; deriving an implementation whose structure should mirror its contract; removing representation that carries no required meaning; or deciding how much structure and protection from failure the work needs.
 ---
 
 # Simplicity
@@ -25,6 +25,32 @@ Get clear answers to these questions before you judge a design:
 - How will people use and change the system?
 
 Keep complex parts that come from the real need. Take out complex parts that come only from the chosen design.
+
+## Make the program a smallest faithful model
+
+Treat an implementation as a constructive proof of its contract. Start from the required relation between inputs, outputs, state, effects, failures, and progress. Derive the program from that relation instead of letting incidental execution mechanics determine its conceptual structure.
+
+Make the structure of the program preserve the structure of the need:
+
+- Let composition of rules remain visible as composition.
+- Let alternatives correspond exactly to real partitions of the domain.
+- Let repeated or recursive structure follow the problem's inductive structure.
+- Let state record only history on which a future result can depend.
+- Let each boundary coincide with a change in meaning, knowledge, ownership, lifetime, or trust.
+
+Treat every construct as a new semantic distinction and a new proof obligation. Ask which proposition from the contract it witnesses. If it witnesses none, look for a semantics-preserving contraction that removes the distinction.
+
+Reach a semantic normal form:
+
+1. State the complete observable meaning of the program.
+2. Mark the distinctions required to preserve that meaning.
+3. Contract every unmarked distinction whose removal preserves types, evaluation, effects, failures, ownership, lifetime, cost, and required observability.
+4. Repeat until no such contraction remains.
+5. When several fixed points remain, choose the one with the smallest proof surface across the whole path.
+
+Measure proof surface by the independent facts, states, paths, orders, representations, and boundaries that a reader or proof must track. One surface is strictly smaller only when it requires no more tracking in every dimension and less in at least one. Leave incomparable surfaces unordered instead of inventing weights. Do not measure by characters, lines, or cleverness.
+
+Compactness is not density. Reject a contraction that hides a required domain distinction, makes an effect or failure harder to see, repeats work, or makes the reader reconstruct more facts than the program states. The best form is the smallest one that displays the whole truth.
 
 ## Find structure with no clear use
 

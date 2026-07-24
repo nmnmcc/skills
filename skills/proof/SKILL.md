@@ -1,6 +1,6 @@
 ---
 name: proof
-description: Write and maintain human-checkable, mathematical-style proofs of correctness and optimality beside first-party production code. Use when designing, writing, changing, reviewing, or releasing production functions or modules and Codex must prove that each implementation satisfies its contract and that no other correct solution is strictly better within an explicit solution space and ordering; justify choices such as binding versus inlining, algorithms, data forms, control flow, abstractions, boundaries, dependencies, and effects; establish a whole-project proof baseline; or re-prove every affected obligation. Treat correctness as the feasibility gate and do not use tests or machine checks as substitutes for the written proof.
+description: Write and maintain human-checkable, mathematical-style proofs of correctness and optimality beside first-party production code. Use when designing, writing, changing, reviewing, or releasing production functions or modules and Codex must prove that each implementation satisfies its contract and that no other correct solution is strictly better within an explicit solution space and ordering; justify representation, algorithms, data forms, control flow, abstractions, boundaries, dependencies, and effects; establish a whole-project proof baseline; or re-prove every affected obligation. Treat correctness as the feasibility gate and do not use tests or machine checks as substitutes for the written proof.
 ---
 
 # Proof
@@ -82,9 +82,9 @@ Do not invent weights or priorities to make the current implementation win. Get 
 
 Account for every production choice that has a feasible alternative. Include:
 
-- introducing a binding or inlining an expression;
-- naming, scope, lifetime, evaluation count, and evaluation order;
-- a direct expression, helper, function, type, class, abstraction, or layer;
+- every introduced distinction, state, step, evaluation boundary, and order;
+- the representation and composition of facts and transformations;
+- a helper, function, type, class, abstraction, or layer;
 - an algorithm, data structure, representation, branch order, or state model;
 - an interface, module boundary, dependency, cache, concurrency model, error form, or effect boundary;
 - duplication, sharing, eager work, delayed work, and generated work.
@@ -99,7 +99,7 @@ For every remaining choice:
 4. Apply the stated order to eliminate or tie every other form.
 5. Conclude the strongest true result: unique optimum, tied optimum, Pareto optimum, or optimality open.
 
-For a binding versus inlining, compare at least evaluation count and order, effects, reuse, scope, lifetime, type narrowing, domain meaning, duplication, reading cost, and change cost. A binding is not optimal merely because its name sounds helpful. Inlining is not optimal merely because it removes a line. If both forms are correct and the stated order cannot distinguish them, record a tie. If an expression is effectful or used more than once, prove whether inlining changes evaluation or duplicates work. If a pure single-use binding does no proved work and fewer unnecessary parts is the first criterion, inlining strictly dominates it.
+Treat the implementation as a proof term for its contract. Apply the semantic normal form from `simplicity` before declaring the solution space complete. Include every behavior-preserving contraction in `S`. A form is irreducible only when every remaining distinction witnesses an authoritative fact or removing it would break a required type, evaluation, effect, failure, ownership, lifetime, cost, or observability property. When a contraction preserves every higher-priority property and reduces proof surface, it strictly dominates the uncontracted form. If distinct irreducible forms expose the same required facts at equal cost, record a tie.
 
 ## Use the minimal complete proof normal form
 
@@ -263,7 +263,7 @@ Name the first invalid step. Mark the matching correctness or optimality obligat
 2. Inventory every production module and callable body. Establish the full baseline when none exists.
 3. Write or repair each contract before reasoning from it.
 4. Prove correctness for every function, module, and composition before comparing solutions.
-5. Inventory every production choice, including local bindings and inlining, and define its complete solution space and order.
+5. Inventory every semantic distinction and production choice, derive its semantic normal form, and define its complete solution space and order.
 6. Prove a lower bound, exhaustive comparison, dominance transformation, normal form, contradiction, or another sound universal argument.
 7. Write each local correctness and optimality proof beside its code and each composition proof in the nearest `PROOF.md`.
 8. Try to break correctness with a counterexample and optimality with a strictly better correct solution.
