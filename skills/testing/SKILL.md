@@ -1,36 +1,32 @@
 ---
 name: testing
-description: Write good software tests after proving every rule that can be proved. Use when you design, change, fix, review, or release software; choose test cases, boundaries, levels, doubles, fixtures, assertions, or checks; decide which tests to run; or fix a test suite that is weak, flaky, slow, hard to change, or gives a false picture. Put rules first in the design, types, exhaustive checks, schemas, constraints, static analysis, or direct proof. Then test the important risk left where proof ends.
+description: Write maintainable software tests that exercise observable behavior. Use when you design, change, fix, review, or release software; choose test cases, runtime boundaries, levels, doubles, fixtures, or assertions; decide which tests to run; or fix a test suite that is weak, flaky, slow, hard to change, or gives a false picture. Choose the smallest runtime boundary that can expose the important risk, then verify the result and effects a real caller can observe.
 ---
 
 # Testing
 
-## Prove what you can. Test what is left.
+## Test important behavior
 
-Testing is one part of making software right. It is not the source of all that is right. A test sees only the runs you choose. It cannot prove a rule for every allowed case.
-
-First put every rule that can be proved into the software or its checks. Where you can, make a bad state impossible. Use the design, types, compiler checks, a check of every case, a `schema` (rules for the form of data), database rules, a `static check` (a check that does not run the software), or a direct proof.
-
-Say that a rule is proved only if the proof covers every allowed case under clear conditions. A type, build, schema, or lint check may prove one part and leave another part open. Do not say it proves more than it does.
+Run the software through a real boundary and observe its result, state, effects, or failure.
 
 For each promise, state:
 
-- What is proved, how it is proved, and under what conditions
-- Where values, effects, versions, machines, people, or outside systems leave the proof
-- What may go wrong in the gap and how much harm it may do
-- Which test, if any, can show that risk
+- What a real caller can observe
+- Which inputs, states, effects, versions, machines, people, or outside systems may change the result
+- What may go wrong and how much harm it may do
+- Which runtime boundary and test can expose that risk
 
-Every test kept over time must fill a named gap in proof and guard a separate, important risk. If a stronger proof later closes the gap, remove the test when it adds no more useful information.
+Keep a test only when it guards a named, important risk. Remove it when the risk is gone or another behavioral test gives the same useful signal.
 
 ## Know the real test setup
 
 Before you write a test:
 
-- Read the wanted behavior, its real callers, the code, the proof already in place, and the nearest tests.
-- Find the normal test commands, settings, test data, helpers, and `CI` checks. `CI` means the shared automatic checks.
+- Read the wanted behavior, its real callers, the code, and the nearest tests.
+- Find the normal test commands, settings, test data, helpers, and `CI` jobs. `CI` means the shared automatic test jobs.
 - Find who or what sees the promise. Find the first place where a wrong result can be seen.
-- Run the nearest check that is already there when it gives a useful starting point.
-- Use the test tools and style already in the project. Add a new tool only when the old tools cannot make a needed check and the new cost will be useful for a long time.
+- Run the nearest test that is already there when it gives a useful starting point.
+- Use the test tools and style already in the project. Add a new tool only when the old tools cannot exercise a needed behavior and the new cost will be useful for a long time.
 
 Judge a test by what it truly does, not by a folder or a name such as `unit`, `integration`, or `end-to-end`.
 
@@ -38,7 +34,7 @@ For a review or a search for the cause of a fault, inspect and report. Change te
 
 ## Know what to test and when
 
-Add or keep a test when an important promise is not proved. Give most care to:
+Add or keep a test when an important promise has meaningful risk and no existing behavioral test guards it. Give most care to:
 
 - A known bug that gives a real bad example
 - Input and output at run time, framework behavior, `serialization` (putting data into a form for storage or transfer), settings, or links between deployed parts
@@ -46,17 +42,17 @@ Add or keep a test when an important promise is not proved. Give most care to:
 - An agreement between systems, clients, or versions that may change on their own
 - Access rights, security, privacy, money, loss of data, support for old forms, or access for people with different needs
 - Speed, use of memory or other resources, or an important user journey
-- A rule over a large set of inputs when there is no full proof
+- A rule over a large set of inputs where a few examples may miss important faults
 
-Do not add a test only because lines changed. Do not repeat a rule already proved by the compiler, a type, a schema, or a data rule. For a document, code form, `generated output` (files made by a tool), or `vendor code` (code from outside the project), it is often better to check the source rule or generator directly.
+Do not add a test only because lines changed. Do not repeat behavior already guarded at an equally useful boundary. For `generated output` (files made by a tool) or `vendor code` (code from outside the project), test only behavior the project owns and can observe. Static checks are brittle, difficult to maintain, and **extremely discouraged**.
 
 Choose the time from the kind of work:
 
-- For a bug, make the smallest bad example fail before the fix when that is useful. If the fix proves that the whole bad state is impossible, keep the proof instead of a test that says the same thing. If not, keep the smallest useful test for the bug.
-- For a change that should keep behavior the same, write a `characterization test` only for important behavior that a user can see and that no other check proves. This test records what the software does now.
-- For a new feature, make its acceptance rule clear early. Prove what you can in the design. Add tests for the gaps before other code needs the feature or before release.
+- For a bug, make the smallest bad example fail before the fix when that is useful. Keep the smallest runtime regression test that exposes the bug.
+- For a change that should keep behavior the same, write a `characterization test` only for important behavior that a user can see and that no other behavioral test guards. This test records what the software does now.
+- For a new feature, make its acceptance rule clear early. Add tests for the important runtime risks before other code needs the feature or before release.
 - For a planned behavior change, change only the tests for that promise. Tests for other promises should stay the same.
-- For a short study or trial, test as needed to learn. Keep a test only for behavior that will stay and is not proved.
+- For a short study or trial, test as needed to learn. Keep a test only for behavior that will stay and remains at risk.
 
 Work test-first when seeing the right failure will make the rule clearer or guard the fix. Do not do it only as a ceremony.
 
@@ -68,20 +64,20 @@ Choose cases from the rule and the risk, not from the branches in the code:
 - At a point where behavior changes, test just below it, at it, and just above it when those values exist.
 - Use a `decision table` when several conditions join to give different results. The table shows each useful set of conditions and its result.
 - Test allowed and forbidden moves between states. Test important orders of moves when past events change the result.
-- Keep a real failure from use as a named example when the larger group behind it is still not proved.
+- Keep a real failure from use as a named example when the larger group behind it remains at risk.
 - Test success, refusal, failure, recovery, and no unwanted effect only when each one guards a different risk.
 
 Use a table of cases, sometimes called a `parameterized test`, when all cases state the same rule and each failure still shows which input was wrong. Split cases when their setup, action, meaning, or fault report is different.
 
-Use a `property test` or `fuzz test` when one stable rule covers a very large input set. Such a test makes many inputs and looks for a bad example. Give it an `oracle`: a separate way to know the right answer. Make useful edge inputs, make a failure repeatable, and cut it down to a small bad example. These runs search for faults; they do not prove the rule.
+Use a `property test` or `fuzz test` when one stable rule covers a very large input set. Such a test makes many inputs and looks for a bad example. Give it an `oracle`: a separate way to know the right answer. Make useful edge inputs, make a failure repeatable, and cut it down to a small bad example. These runs search for faults; they do not establish correctness for every input.
 
 Do not test every mix of values without a reason based on risk. Pick the few cases most able to tell right behavior from a likely fault.
 
-## Put the test where proof ends
+## Put the test at an observable boundary
 
-Use the smallest boundary that goes past the unproved condition and can see its effect:
+Use the smallest runtime boundary that can exercise the promise and see its effect:
 
-- Use a unit test for one local behavior that is not proved in another way.
+- Use a unit test for one local behavior.
 - Use a component or integration test for work with a framework, database, file system, process, or several real parts.
 - Use a contract test where parts that change on their own must agree on data, errors, order, or support for old forms.
 - Use an end-to-end test for deployed links or an important result that no smaller test can show.
@@ -147,22 +143,21 @@ Read each new or changed test as carefully as product code. Ask if it is right, 
 
 For a test made for a bug, see it fail for the right reason before the fix when you can. For an important or doubtful test, remove or change the guarded behavior, put in a likely fault, or use `mutation testing`. Mutation testing makes small false changes to the code and checks if tests find them. First make sure the change truly breaks the promise. If the test still passes, it does not guard that promise.
 
-Use code coverage to find behavior whose proof is not known. Do not use it as a mark of test quality. Much coverage can have weak checks. Little coverage does not say which missing test matters.
+Use code coverage to find behavior that may not be exercised. Do not use it as a mark of test quality. Much coverage can have weak assertions. Little coverage does not say which missing test matters.
 
-Never make a check weaker, replace real behavior with a mock, add another try, or remove a test only to make all tests pass. First find whether the promise, the proof, or the test is wrong.
+Never make an assertion weaker, replace real behavior with a mock, add another try, or remove a test only to make all tests pass. First find whether the promise, the implementation, or the test is wrong.
 
-## Run checks in the right order
+## Run tests in the right order
 
-1. State the promise, its proof, the conditions of that proof, and the risk that is left.
-2. Choose the smallest useful cases and the boundary that can show the gap.
-3. Run the compiler, type, schema, data-rule, static, or formal checks that carry the proof.
-4. Run the new or nearest test. See the wanted failure when that is useful.
-5. Make the smallest part of the behavior work. Run the close check again.
-6. Run the tests for the nearby file, package, or part to find local breaks.
-7. Go wider only over contracts, links, settings, and user journeys touched by the change.
-8. Run the normal `CI` command before you say the work is complete when you can.
+1. State the promise, the conditions that affect it, and the risk that is left.
+2. Choose the smallest useful cases and the runtime boundary that can expose the risk.
+3. Run the new or nearest test. See the wanted failure when that is useful.
+4. Make the smallest part of the behavior work. Run the close test again.
+5. Run the tests for the nearby file, package, or part to find local breaks.
+6. Go wider only over contracts, links, settings, and user journeys touched by the change.
+7. Run the normal `CI` test command before you say the work is complete when you can.
 
-Run fast checks close to every edit. Put slower and wider checks at commit, CI, before release, or at set times. Choose the place from their cost and how soon the team needs to know about a failure.
+Run fast tests close to every edit. Put slower and wider tests at commit, CI, before release, or at set times. Choose the place from their cost and how soon the team needs to know about a failure.
 
 Read every failure. Tell apart a product fault, a test fault, a machine or setup fault, a flaky signal, and an old failure not caused by this work. Fix only what the work owns, but report every limit on trust.
 
@@ -170,10 +165,10 @@ Read every failure. Tell apart a product fault, a test fault, a machine or setup
 
 - Repair real failures soon so people keep trust in the suite.
 - Keep tests fast enough for the place where they run and small enough to point to a fault.
-- Remove a test when proof closes its gap, its risk is gone, or a stronger test gives the same signal.
+- Remove a test when its risk is gone or a stronger behavioral test gives the same signal.
 - Fix test data and helpers when setup hides meaning or shared state ties tests together.
 - Keep the suite easier to understand and change than the behavior it guards.
 
-Report what is proved, what is still open, which test fills each important gap, the exact checks run and their results, and any gap in the tests or their setup. Never call a passing test a general proof. Never say a check ran when it did not.
+Report which runtime behavior is covered, what is still open, which test guards each important risk, the exact tests run and their results, and any gap in the tests or their setup. Never call a passing test a general guarantee. Never say a test ran when it did not.
 
-Stop when every important promise is proved or guarded where proof ends, every chosen test can find a meaningful fault, and more cases would add no useful trust.
+Stop when every important promise is guarded at a meaningful runtime boundary, every chosen test can find a meaningful fault, and more cases would add no useful trust.

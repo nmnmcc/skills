@@ -38,7 +38,7 @@ Use `study` first to learn the real system and choose the relevant engineering v
 - `typesafe` keeps meaning, runtime value, type or contract, data form, proof, and allowed operations in agreement. It matches every guarantee to the checks that support it, then keeps that guarantee safe from its source to its final use.
 - `effect` makes observable work, dependencies, failures, resources, and execution boundaries explicit. It keeps supported work inside the project's effect system and requires explicit user approval before an unavoidable non-effectful escape hatch.
 - `proof` writes human-checkable, mathematical-style proofs beside every first-party production function and module. It proves correctness first, then proves that no strictly better correct implementation exists in the complete stated solution space, from local representation choices through whole-system design.
-- `testing` proves every rule it can, then writes clear tests for important risk where proof ends. A test fills a gap in proof; it does not take the place of proof.
+- `testing` writes maintainable tests for observable behavior through the smallest useful runtime boundary.
 
 Use an engineering domain skill with `study`, `just-do-it`, and the needed engineering view. Study learns the real situation, the domain skill gives the specialized rules, and `point`, `line`, or `plane` gives the shape of the work.
 
