@@ -37,7 +37,7 @@ Use `study` first to learn the real system and choose the relevant engineering v
 - `simplicity` is a basic part of healthy software judgment. It keeps developers close to the real problem, honest about hard parts, and able to spend complexity only where it buys enough strength for the whole system.
 - `typesafe` keeps meaning, runtime value, type or contract, data form, proof, and allowed operations in agreement. It matches every guarantee to the checks that support it, then keeps that guarantee safe from its source to its final use.
 - `effect` makes observable work, dependencies, failures, resources, and execution boundaries explicit. It keeps supported work inside the project's effect system and requires explicit user approval before an unavoidable non-effectful escape hatch.
-- `proof` writes human-checkable, mathematical-style proofs beside every first-party production function and module. It proves correctness first, then proves that no strictly better correct implementation exists in the complete stated solution space, from local representation choices through whole-system design.
+- `pattern` turns recurring project experience into teachable engineering patterns. Each pattern joins a recurring situation and its tensions to an adaptable response, its consequences, and the boundary where it stops applying; the skill keeps those lessons current in a repository-root `patterns/` catalog.
 - `testing` writes maintainable tests for observable behavior through the smallest useful runtime boundary.
 
 Use an engineering domain skill with `study`, `just-do-it`, and the needed engineering view. Study learns the real situation, the domain skill gives the specialized rules, and `point`, `line`, or `plane` gives the shape of the work.
@@ -57,7 +57,7 @@ Use an engineering domain skill with `study`, `just-do-it`, and the needed engin
 |   |-- simplicity/
 |   |-- typesafe/
 |   |-- effect/
-|   |-- proof/
+|   |-- pattern/
 |   `-- testing/
 |-- devenv.nix
 |-- pyproject.toml
@@ -87,7 +87,7 @@ npx skills add nmnmcc/skills --skill plane
 npx skills add nmnmcc/skills --skill simplicity
 npx skills add nmnmcc/skills --skill typesafe
 npx skills add nmnmcc/skills --skill effect
-npx skills add nmnmcc/skills --skill proof
+npx skills add nmnmcc/skills --skill pattern
 npx skills add nmnmcc/skills --skill testing
 ```
 
