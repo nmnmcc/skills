@@ -1,6 +1,6 @@
 ---
 name: pattern
-description: Distill, teach, apply, and maintain project-specific software patterns as independent, runnable teaching repositories. Use when turning concrete engineering experience into a hands-on pattern repository; learning or applying an existing pattern through its executable example; testing whether a lesson transfers to another case; or promoting, revising, splitting, merging, or retiring a pattern. Require one repository per pattern, a working reference implementation, a guided learner journey, and verified commands. Do not treat repeated code, a rule, recipe, decision, abstraction, example, or failure as a pattern by itself.
+description: Distill, teach, apply, and maintain project-specific software patterns as independent, runnable teaching repositories under patterns/. Use when turning concrete engineering experience into a hands-on pattern repository; learning or applying an existing pattern through its executable example; testing whether a lesson transfers to another case; or promoting, revising, splitting, merging, or retiring a pattern. Require patterns/<pattern-name>/ for each pattern, one repository per pattern, a working reference implementation, a guided learner journey, and verified commands. Do not treat repeated code, a rule, recipe, decision, abstraction, example, or failure as a pattern by itself.
 ---
 
 # Pattern
@@ -9,7 +9,7 @@ description: Distill, teach, apply, and maintain project-specific software patte
 
 Hold one working attitude: TEACH WHAT CAN LIVE BEYOND ONE CASE BY LETTING THE LEARNER RUN IT.
 
-Produce each pattern as its own code repository. Let a learner clone or open that repository, run the example, observe the important behavior, change something, and verify what the change teaches. Do not reduce a pattern to a document in another project's catalog.
+Produce each pattern as its own code repository at `patterns/<pattern-name>/`. Let a learner clone or open that repository, run the example, observe the important behavior, change something, and verify what the change teaches. Do not reduce a pattern to a document in a catalog.
 
 Define a pattern as one teachable relation with five parts:
 
@@ -23,10 +23,11 @@ Make the repository teach this relation. Code demonstrates the response; tests a
 
 Let current requirements, supported outside contracts, project settings, and direct evidence override a pattern. Teach a pattern as a useful project model, never as truth that reality must obey.
 
-## Require one independent repository per pattern
+## Put independent repositories under patterns/
 
 Give every pattern:
 
+- its own `patterns/<pattern-name>/` directory;
 - its own version-control root and history;
 - one stable, kebab-case repository name;
 - one pattern only;
@@ -36,21 +37,25 @@ Give every pattern:
 - a learner-facing `README.md`; and
 - the configuration and fixtures needed to run without private project state.
 
-Do not create a repository-root `patterns/` catalog in the source project. Do not collect several patterns in one monorepo, package, documentation site, or examples directory. Do not place a nested version-control repository inside the source project unless the user explicitly requests that layout.
-
-Establish the destination and repository name before writing. When the user has not authorized a remote repository, create or propose only a local independent repository; do not publish it. When no safe independent destination is clear, report the proposed name and location instead of silently nesting it in the current repository.
-
-Adapt the repository layout to its ecosystem. A typical result is:
+Use `patterns/` as the common parent directory and each immediate child as one independent repository:
 
 ```text
-<pattern-name>/
-├── README.md
-├── <manifest and lockfile>
-├── <source or runnable example>
-├── <tests or executable checks>
-├── <sample configuration and fixtures, when needed>
-└── <CI workflow, when the hosting target is known>
+patterns/
+├── first-pattern/       # independent repository
+│   ├── .git/
+│   ├── README.md
+│   ├── <manifest and lockfile>
+│   ├── <source or runnable example>
+│   └── <tests or executable checks>
+└── another-pattern/     # another independent repository
+    └── ...
 ```
+
+Do not turn `patterns/` itself into the single repository that owns all pattern implementations. Do not collect several patterns in one child repository, package, documentation site, or examples directory. A parent index may link to the child repositories, but it never replaces their code, history, README, or runnable teaching path.
+
+Find the repository or workspace root that owns the in-scope work and use its `patterns/` directory. Create `patterns/` only when producing the first qualified pattern. Establish the kebab-case child name before writing. When the user has not authorized a remote repository, create only the local independent repository; do not publish it.
+
+Adapt each child repository's layout to its ecosystem. Include sample configuration, fixtures, and CI when needed or when the hosting target is known.
 
 Add folders only when the example needs them. Keep the repository small enough for the pattern's relation to remain visible.
 
@@ -185,6 +190,6 @@ Before handoff, reproduce the learner journey from a clean checkout or equivalen
 
 If a clean run is not possible in the current environment, state exactly which step remains unverified and why. Never describe a repository as runnable based only on reading its code.
 
-Report the repository path or URL, status, learner commands, verification results, and remaining platform or dependency limits. When the task is read-only, do not create or change a repository; report the proposed repository name, destination, status, teaching journey, and required checks instead.
+Report the `patterns/<pattern-name>/` path or remote URL, status, learner commands, verification results, and remaining platform or dependency limits. When the task is read-only, do not create or change a repository; report the proposed child name, status, teaching journey, and required checks instead.
 
-Finish when one independent repository teaches one qualified pattern, the documented journey works from a clean state, the code and prose express the same relation, and the evidence supports its status.
+Finish when one independent repository under `patterns/` teaches one qualified pattern, the documented journey works from a clean state, the code and prose express the same relation, and the evidence supports its status.
