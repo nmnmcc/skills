@@ -1,6 +1,6 @@
 ---
 name: effect
-description: "Use effect-aware thinking whenever designing, writing, changing, reviewing, or debugging code. Make observable work, dependencies, failures, state changes, resource lifetimes, concurrency, cancellation, and execution boundaries explicit. Follow the project's existing tools, use the matching guide for Effect or ZIO, learn the exact public API when a library is involved, keep meaning intact from design through execution, and verify the real behavior. When an effect system owns the work, keep every supported capability inside it and require the user's explicit approval before any unavoidable non-effectful escape hatch."
+description: "Use effect-aware thinking whenever designing, writing, changing, reviewing, or debugging code. Make observable work, dependencies, failures, state changes, resource lifetimes, concurrency, cancellation, and execution boundaries explicit. Follow the project's existing tools, use the matching guide for Effect, Cats Effect 3, or ZIO, learn the exact public API when a library is involved, keep meaning intact from design through execution, and verify the real behavior. When an effect system owns the work, keep every supported capability inside it and require the user's explicit approval before any unavoidable non-effectful escape hatch."
 ---
 
 # Effect
@@ -65,9 +65,10 @@ If exact source cannot be reached, say what evidence is available and what remai
 Read the guide for the library that owns the work before choosing APIs:
 
 - For the TypeScript `effect` package or `@effect/*` modules, read [Effect](references/effect.md) completely.
+- For Scala Cats Effect 3 and its official modules, read [Cats Effect](references/cats-effect.md) completely.
 - For Scala ZIO and its modules, read [ZIO](references/zio.md) completely.
 
-Load only the guide that applies to the current part. If different parts use both libraries, apply each guide only at the boundary it owns. For another effect system, follow this main workflow and inspect that system's exact public sources instead of treating either guide as a fixed recipe.
+Load only the guide that applies to the current part. If different parts use more than one library, apply each guide only at the boundary it owns. For Cats Effect 2 or another effect system, follow this main workflow and inspect that system's exact public sources instead of treating another guide as a fixed recipe.
 
 ## Carry the model through the whole workflow
 
