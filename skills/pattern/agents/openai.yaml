@@ -1,4 +1,4 @@
 interface:
   display_name: "Pattern"
-  short_description: "Build runnable pattern repositories under patterns/."
-  default_prompt: "Use $pattern to turn a recurring engineering lesson into an independent, runnable repository at patterns/<pattern-name>/."
+  short_description: "Build tracked, runnable pattern codebases under patterns/."
+  default_prompt: "Use $pattern to turn a recurring engineering lesson into a tracked, standalone codebase at patterns/<pattern-name>/."
