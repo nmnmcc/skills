@@ -1,4 +1,4 @@
 interface:
   display_name: "Pattern"
-  short_description: "Teach reusable project patterns from real work."
-  default_prompt: "Use $pattern to turn recurring project experience into teachable patterns and keep the repository-root patterns/ catalog current as you work."
+  short_description: "Build runnable repositories that teach project patterns."
+  default_prompt: "Use $pattern to turn a recurring engineering lesson into an independent, runnable teaching repository."

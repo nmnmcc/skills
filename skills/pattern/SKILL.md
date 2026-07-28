@@ -1,15 +1,15 @@
 ---
 name: pattern
-description: Distill, teach, reuse, and maintain project-specific software patterns in a repository-root patterns/ catalog. A pattern is a teachable relation among a recurring situation, its tensions, an adaptable response, its consequences, and its limits. Use when understanding, designing, writing, changing, reviewing, testing, or releasing software; applying an established project pattern; turning concrete project experience into a candidate pattern hypothesis; testing transfer to another case; merging or splitting related lessons; or retiring stale guidance. Do not treat repeated code, a rule, recipe, decision, abstraction, example, or failure as a pattern by itself.
+description: Distill, teach, apply, and maintain project-specific software patterns as independent, runnable teaching repositories. Use when turning concrete engineering experience into a hands-on pattern repository; learning or applying an existing pattern through its executable example; testing whether a lesson transfers to another case; or promoting, revising, splitting, merging, or retiring a pattern. Require one repository per pattern, a working reference implementation, a guided learner journey, and verified commands. Do not treat repeated code, a rule, recipe, decision, abstraction, example, or failure as a pattern by itself.
 ---
 
 # Pattern
 
-## Teach what can live beyond one case
+## Teach through a repository people can run
 
-Hold one working attitude: TEACH WHAT CAN LIVE BEYOND ONE CASE.
+Hold one working attitude: TEACH WHAT CAN LIVE BEYOND ONE CASE BY LETTING THE LEARNER RUN IT.
 
-Turn what real project work reveals into a lesson that another person or agent can carry into a new case. Teach enough for the reader to recognize the situation, adapt the response, expect its effects, and stop where the lesson no longer fits.
+Produce each pattern as its own code repository. Let a learner clone or open that repository, run the example, observe the important behavior, change something, and verify what the change teaches. Do not reduce a pattern to a document in another project's catalog.
 
 Define a pattern as one teachable relation with five parts:
 
@@ -19,159 +19,172 @@ Define a pattern as one teachable relation with five parts:
 - **Consequences:** what the response enables, costs, risks, or changes.
 - **Boundary:** the conditions under which the relation changes or stops applying.
 
-The pattern is this relation, not its name, document, example, or present code. One pattern may have different implementations when the same tensions need the same response. Similar code may express different patterns when its situations or tensions differ.
-
-Cover any project engineering area when useful: code, architecture, data, tests, operations, or development work. Keep the lesson specific to the project. Do not turn the catalog into a book of general software knowledge.
+Make the repository teach this relation. Code demonstrates the response; tests and runnable experiments reveal its consequences and boundary; prose helps the learner recognize and adapt it.
 
 Let current requirements, supported outside contracts, project settings, and direct evidence override a pattern. Teach a pattern as a useful project model, never as truth that reality must obey.
 
+## Require one independent repository per pattern
+
+Give every pattern:
+
+- its own version-control root and history;
+- one stable, kebab-case repository name;
+- one pattern only;
+- a manifest or native project definition;
+- a runnable reference implementation;
+- automated verification;
+- a learner-facing `README.md`; and
+- the configuration and fixtures needed to run without private project state.
+
+Do not create a repository-root `patterns/` catalog in the source project. Do not collect several patterns in one monorepo, package, documentation site, or examples directory. Do not place a nested version-control repository inside the source project unless the user explicitly requests that layout.
+
+Establish the destination and repository name before writing. When the user has not authorized a remote repository, create or propose only a local independent repository; do not publish it. When no safe independent destination is clear, report the proposed name and location instead of silently nesting it in the current repository.
+
+Adapt the repository layout to its ecosystem. A typical result is:
+
+```text
+<pattern-name>/
+├── README.md
+├── <manifest and lockfile>
+├── <source or runnable example>
+├── <tests or executable checks>
+├── <sample configuration and fixtures, when needed>
+└── <CI workflow, when the hosting target is known>
+```
+
+Add folders only when the example needs them. Keep the repository small enough for the pattern's relation to remain visible.
+
+## Make the first run teach
+
+Write `README.md` as the front door for a learner. Make it possible to follow without the author's private context. Include:
+
+- the pattern status: `candidate`, `established`, or `retired`;
+- what the learner will understand or be able to do;
+- the situation, tensions, response, consequences, and boundary;
+- the concrete project evidence from which the pattern was learned;
+- prerequisites with supported versions;
+- exact setup, run, and verification commands;
+- what the learner should observe and why it matters;
+- at least one guided change, exercise, or experiment;
+- an exact command or observable result that checks the exercise;
+- the tempting alternative when it materially improves understanding;
+- cleanup or reset instructions when the exercise changes state; and
+- known limits, counterexamples, and transfer questions for a new case.
+
+Keep the reference implementation runnable before the exercise begins. Prefer a short path to the first meaningful observation. Explain project-specific terms that an informed reader may not know.
+
+Use stable source paths, symbols, commands, tests, and decisions as evidence. Avoid unstable line numbers, timestamps, commit hashes, raw logs, and large copied code. Link to public or durable source material when the learner needs it.
+
+## Make the repository genuinely runnable
+
+Use the project's native toolchain and ordinary conventions. Pin the toolchain and dependencies to the degree needed for repeatable learning. Commit the lockfile when that ecosystem normally uses one.
+
+Keep the teaching path self-contained:
+
+- provide small, owned fixtures instead of depending on production data;
+- provide sample configuration and safe local defaults;
+- never commit secrets or personal data;
+- avoid requiring private services, repositories, registries, or credentials;
+- replace external systems with a local substitute only when the substitute preserves the tension being taught; and
+- state any unavoidable network, platform, cost, or account dependency before the run command.
+
+Make failures instructional. Commands should fail with enough information for the learner to recover. Do not hide the pattern behind scaffolding, a framework, or an abstraction larger than the lesson.
+
+Test observable behavior rather than code shape. Include checks for the main success and for the most important boundary or consequence. Add CI when the repository is published to a known hosting platform; run the same learner commands in CI.
+
 ## Know what is not a pattern
 
-Do not call an item a pattern merely because it is useful or repeated:
+Do not produce a pattern repository merely because an item is useful or repeated:
 
 - Repeated code or a common shape is an observation until the same relation is known.
-- A rule, policy, or decision gives direction but is not a pattern unless it teaches all five parts for repeated cases.
-- A recipe or checklist gives steps but is not a pattern when the reader cannot adapt it from the tensions.
+- A rule, policy, or decision gives direction but is not a pattern unless it teaches all five parts for recurring cases.
+- A recipe or checklist gives steps but is not a pattern when the learner cannot adapt it from the tensions.
 - An abstraction, type, module, or tool may carry a pattern but is not the pattern itself.
 - An example, bug, failure, or lesson learned may support a pattern but is not one alone.
 - A one-time choice has no transfer to teach.
-- A general best practice with no special project meaning belongs outside the project catalog.
+- A general best practice with no special project meaning does not justify a project pattern repository.
 
-Do not create a standalone anti-pattern entry. When a tempting bad response helps teach a positive pattern, include it only as a contrast inside that pattern. Explain what makes it tempting, how it fails under the stated tensions, and how the positive response handles them. Treat this contrast as a by-product of teaching the positive pattern, not as a separate lesson to collect.
+Do not create a standalone anti-pattern repository. When a tempting bad response helps teach a positive pattern, demonstrate or explain it inside the positive pattern's repository. Show why it is tempting, how it fails under the stated tensions, and how the response handles them.
 
 ## Earn the right to teach
 
 Keep these states distinct:
 
-- An **observed case** is what the project directly does or has experienced.
+- An **observed case** is what a project directly does or has experienced.
 - A **candidate** is a pattern hypothesis inferred from at least one real case.
-- An **established pattern** is a complete, teachable relation with fitting project support.
-- A **retired pattern** is a lesson kept only to understand old work or move to a replacement.
+- An **established pattern** is a complete, runnable, transferable lesson with fitting project support.
+- A **retired pattern** is a repository kept only to understand old work or move to a replacement.
 
-Create a candidate only when every part of the relation can be stated honestly, at least one concrete project source supports it, and another real case is likely. Keep observation, inference, assumption, missing support, and counterevidence clear in the prose. Do not make a candidate sound established.
+Create a candidate repository only when every part of the relation can be stated honestly, at least one concrete project source supports it, another real case is likely, and a runnable teaching example can preserve the important tensions.
 
-Promote a candidate to `established` when either condition holds:
+Promote a candidate to `established` only when either condition holds:
 
-- an authoritative project rule or explicit user decision itself defines the recurring situation, tensions, response, consequences, and boundary; or
-- at least two independent, successful uses exist in the repository and the relevant checks pass.
+- an authoritative project rule or explicit user decision defines the recurring situation, tensions, response, consequences, and boundary; or
+- at least two independent, successful uses exist and the relevant checks pass.
 
-Treat uses as independent only when one is not generated, copied, or derived from the other. Match each check to the claim it supports. Do not promote a candidate because its prose is polished, because no one objected, or because the file says it is established.
+Treat uses as independent only when one is not generated, copied, or derived from the other. Do not promote a repository because its tutorial is polished, its tests pass in isolation, no one objected, or the README calls it established.
 
-Before teaching an established pattern, make sure a person or agent without the author's private context can:
+Before teaching an established pattern, verify that a learner can:
 
-1. recognize a new situation in which it applies;
-2. explain the important tensions and why the response fits them;
-3. adapt the response without copying one implementation;
-4. predict the main consequences and trade-offs; and
-5. name a counterexample or boundary where it should not be used.
+1. complete the documented setup from a clean checkout;
+2. run the reference implementation and observe the claimed behavior;
+3. complete the guided change or experiment and verify its effect;
+4. recognize a new situation in which the pattern applies;
+5. explain why the response fits the tensions;
+6. adapt the response without copying this implementation; and
+7. name a counterexample or boundary where it should not be used.
 
-If this transfer test fails, repair the lesson or keep it as a candidate.
+Keep the repository a candidate if this transfer test fails.
 
 ## Begin with real cases
 
-Inspect the closest project evidence before writing a pattern: requirements, code, tests, settings, operating behavior, failures, and recorded decisions. Use memory and familiar names to search, not to fill the catalog.
+Inspect the closest project evidence before creating or changing a pattern repository: requirements, code, tests, settings, operating behavior, failures, and recorded decisions. Use memory and familiar names to search, not to invent support.
 
 Compare cases before claiming that they share a pattern. Look for different causes that produce the same surface form, different responses that satisfy the same tensions, negative cases, and changes in scope or time that break the relation.
 
-Try to refute the pattern hypothesis. Apply it to another case and predict what should happen. Find the strongest competing explanation and the nearest boundary. Let a mismatch change the situation, tensions, response, consequences, scope, status, or existence of the pattern.
+Try to refute the hypothesis. Apply it to another case and predict what should happen. Find the strongest competing explanation and nearest boundary. Let a mismatch change the relation, example, scope, status, or existence of the repository.
 
-Do not build a whole-project pattern baseline unless the user asks for one. Do not delay requested work to teach a weak or marginal idea.
+Do not create a whole collection of pattern repositories unless the user asks for one. Do not delay requested product work to extract a weak or marginal lesson.
 
-## Find and read the catalog
+## Learn from and maintain repositories
 
-Put the catalog in `patterns/` at the root of the repository that owns the in-scope files. In a monorepo, use the repository root rather than making a catalog for each component.
+When applying a pattern:
 
-When there is no version-control root, use the one project or workspace root established by its manifest and tools. If the root is still unclear, do not create a catalog. Report the proposed location and the ambiguity.
+1. Read its `README.md`.
+2. Inspect its manifest, implementation, tests, and fixtures.
+3. Run its documented setup and verification commands.
+4. Check its assumptions against the current project's requirements, versions, code, settings, and behavior.
+5. Use an applicable `established` pattern as a default only while it still fits.
+6. Treat a `candidate` as a hypothesis to test.
+7. Use a `retired` pattern only to understand old work or migrate to its replacement.
 
-Inspect an existing `patterns/` directory before changing it. Do not take over a directory owned by another tool or used for another kind of file. Preserve a clear project-owned catalog format when it already carries the same meanings. Report a real format collision instead of overwriting it.
+Maintain the teaching repository when evidence or runtime behavior changes:
 
-Do not create an empty `patterns/` directory. Create it only when the work has found at least one qualified candidate.
+- update the example and teaching path together;
+- narrow the stated situation or boundary when transfer fails;
+- split a repository when one relation contains materially different situations, tensions, responses, consequences, or boundaries;
+- merge duplicate lessons by choosing one surviving repository and redirecting or archiving the other;
+- delete an unpublished candidate when its support disappears or it has no reusable lesson; and
+- retire a published established repository when it must no longer guide new work, explaining why and linking its replacement.
 
-Before making an in-scope choice:
+Do not rewrite production code merely to make a pattern easier to teach. Preserve unrelated user changes. Keep generated, vendor, secret, and personal material out of the repository.
 
-1. Read `patterns/README.md` when it exists.
-2. Select entries by their summary and scope, then read every relevant entry in full.
-3. Check each entry against the current requirement, code, settings, dependency version, and nearby tests or operating facts.
-4. Use an applicable `established` pattern as the project default.
-5. Use a `candidate` as a hypothesis to test, not as a rule to follow.
-6. Do not use a `retired` pattern except to understand old code or move to its replacement.
+## Verify the teaching repository
 
-When an established pattern no longer fits, follow the current authority and repair the catalog. Do not keep project work wrong or stale only to agree with a lesson.
+Before handoff, reproduce the learner journey from a clean checkout or equivalent clean worktree:
 
-## Keep one light catalog
+1. install only the documented prerequisites;
+2. run the exact setup command;
+3. run the reference implementation;
+4. confirm the documented observation;
+5. run the automated checks;
+6. perform the guided change or exercise;
+7. run its verification;
+8. follow reset or cleanup instructions; and
+9. inspect the repository for secrets, private dependencies, generated clutter, and undocumented state.
 
-For a new catalog, use this flat form:
+If a clean run is not possible in the current environment, state exactly which step remains unverified and why. Never describe a repository as runnable based only on reading its code.
 
-```text
-patterns/
-├── README.md
-├── first-pattern.md
-└── another-pattern.md
-```
+Report the repository path or URL, status, learner commands, verification results, and remaining platform or dependency limits. When the task is read-only, do not create or change a repository; report the proposed repository name, destination, status, teaching journey, and required checks instead.
 
-Use one stable, kebab-case file name for each pattern. Do not add category directories. Put project areas and components in `scope`.
-
-Give each pattern this small header:
-
-```markdown
----
-status: candidate
-scope:
-  - <project area, component, or project-wide>
----
-
-# <Pattern name>
-
-<Free prose>
-```
-
-Use only `candidate`, `established`, or `retired` for `status`. Use names already present in the project for `scope`; do not invent a fixed global category system.
-
-Keep the body free in form. Do not require standard sections. Make all five parts, project support, counterevidence, and transfer limits easy for a reader to find. Use headings, examples, diagrams, or short code only when they improve the teaching.
-
-Write equally for people and agents. Use the language already used in the project's documentation. When the project has no clear language, use the language of the user's task. Explain project terms that an informed reader outside the immediate work may not know. Prefer stable project-relative paths, symbols, rules, tests, and decisions over unstable line numbers, timestamps, commit hashes, raw logs, or large copied code.
-
-Maintain `patterns/README.md` with:
-
-- a short statement of the catalog's purpose and the five-part definition;
-- the meanings of the three statuses;
-- one alphabetically sorted table with `Pattern`, `Status`, `Scope`, and `Summary`;
-- a link to every pattern file, including retired patterns kept for history or migration.
-
-Keep the index and files in agreement in the same change.
-
-## Repair what the project teaches
-
-Search the index and nearby entries before adding a file. Extend an existing pattern only when it has the same situation, tensions, response, consequences, and boundary.
-
-Repair the catalog when evidence changes:
-
-- Merge entries that teach the same relation. Keep one stable file and repair every catalog link.
-- Split an entry when one part of the relation differs enough to change recognition or action. Name the contexts clearly and link the variants.
-- Narrow `scope` when the relation holds in only part of the project.
-- Delete a candidate when its support disappears, a real case disproves it, transfer fails, or it has no reusable lesson.
-- Mark an established pattern `retired` when it is no longer valid. Explain why it must not guide new work and link its replacement when one exists.
-
-Do not silently rewrite a conflict into agreement. Keep the difference visible until project facts show a real scope split, replacement, or unresolved choice.
-
-## Respect the task's authority
-
-When the task authorizes repository changes, update relevant pattern files and their index as part of the same change. Pattern maintenance needs no separate request when it stays within that authorized work.
-
-When the task is read-only, such as an explanation, review, or diagnosis, do not change the repository. Report the proposed pattern path, status, and update instead. Also obey an explicit request not to write pattern files.
-
-Preserve unrelated user changes. Do not rewrite production code merely to make a pattern easier to teach. Never record secrets, personal data, or generated and vendor details that the project does not own. Keep pattern work smaller than the value it gives to later work.
-
-## Run the teaching loop
-
-1. Set the work boundary and find the repository root.
-2. Read the index and every relevant lesson.
-3. Inspect the current project evidence and test each applicable relation.
-4. Do the requested work with established patterns that still fit.
-5. Run the checks needed by the work.
-6. Distill only the reusable relation that the work revealed or changed.
-7. Pass the definition, support, counterexample, and transfer tests.
-8. Create, update, promote, merge, split, delete, or retire entries when authorized.
-9. Repair the alphabetical index and report every pattern change.
-
-Finish when the requested result is complete, relevant established patterns still teach the truth, each changed status has fitting support, and the catalog has no duplicate or stale lesson caused by the work.
+Finish when one independent repository teaches one qualified pattern, the documented journey works from a clean state, the code and prose express the same relation, and the evidence supports its status.
