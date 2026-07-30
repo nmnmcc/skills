@@ -1,0 +1,4 @@
+interface:
+  display_name: "Docs"
+  short_description: "Write true, useful software docs and comments."
+  default_prompt: "Use $docs to write or improve software documentation and code comments that help the right reader act on the real system."

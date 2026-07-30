@@ -29,8 +29,8 @@
     },
     {
       "title": "Engineering Domains",
-      "description": "Keep software simple and type-safe, make effects explicit, teach reusable project patterns from real work, and test observable runtime behavior.",
-      "skills": ["simplicity", "typesafe", "effect", "pattern", "testing"]
+      "description": "Keep software simple and type-safe, make effects explicit, write truthful documentation, teach reusable project patterns from real work, and test observable runtime behavior.",
+      "skills": ["simplicity", "typesafe", "effect", "docs", "pattern", "testing"]
     }
   ]
 }
