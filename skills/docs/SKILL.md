@@ -1,6 +1,6 @@
 ---
 name: docs
-description: Write, review, and maintain software documentation and code comments that help a specific reader understand, use, change, or operate the real system. Use when creating or changing READMEs, setup guides, tutorials, how-to guides, references, API or architecture docs, runbooks, migration notes, docstrings, or inline comments; deciding what to document and where it belongs; checking commands and examples; or removing stale, misleading, or repeated explanation.
+description: Write, review, and maintain software documentation and code comments that stay in step with the code and contracts they explain and help a specific reader understand, use, change, or operate the real system. Use when implementation changes behavior readers rely on; when creating or changing READMEs, setup guides, tutorials, how-to guides, references, API or architecture docs, runbooks, migration notes, docstrings, or inline comments; when deciding what to document and where it belongs; when checking commands and examples; or when removing stale, misleading, or repeated explanation.
 ---
 
 # Docs
@@ -11,7 +11,7 @@ Treat documentation as part of the software. Make it agree with the system, help
 
 Hold one main rule:
 
-> Give the right reader the smallest true explanation that lets them reach and check the needed result.
+> Keep code and its needed explanation together: give the right reader the smallest true explanation, in a place whose owner and reader path can keep it true, in the same verified change.
 
 Do not write prose only because a file, function, or change exists. Write when a reader needs meaning that the code, interface, or tool cannot show well enough by itself.
 
@@ -30,6 +30,33 @@ Then inspect the real system. Read the project front door, nearby source, public
 Follow one real path from purpose to result. Keep checked facts, supported inferences, plans, and unknowns separate. Never turn a planned state into present fact.
 
 Find the main source for every important claim. If no source can keep a claim true, narrow the claim, create a fitting check when the project owns one, or state the limit.
+
+## Keep documentation with the code
+
+Treat "together" as shared ownership and lifecycle, not a rule that every explanation must be in the same file.
+
+When the user asks to implement software, make the working behavior the primary result. Change the owning code and its checks. Add or update only the documentation needed to understand, use, change, or operate that behavior. Never deliver prose in place of the requested implementation.
+
+Inspect the existing project structure before creating a path. Move outward from the code only as far as the reader need requires:
+
+1. Make code, names, types, and tests carry facts they can state and check.
+2. Put a public contract in the owning interface or docstring.
+3. Put a local reason or invariant beside the code it controls.
+4. Update the nearest existing README or reference that guides readers to the changed part.
+5. Update the root README for project-wide purpose, entry, setup, or navigation.
+6. Use an existing documentation tree for material that truly crosses local owners.
+
+Choose the location from the relations in the real system:
+
+- **Meaning:** Keep a fact near the code or interface that gives it meaning. Move it outward when it explains a relation across several parts.
+- **Ownership:** Put the explanation where the person or part responsible for its truth can find and maintain it.
+- **Change:** Prefer a location that a maintainer will meet when changing the behavior that can make the explanation false.
+- **Reader path:** Put navigation where the reader starts and detail where the reader needs it. Link the two instead of copying facts.
+- **Lifetime:** Keep material with the code when they change and retire together. Give it a separate home when it has a real shared owner, version, release, or operating life.
+
+A documentation tree fits when several durable documents share a reader path, navigation, owner, and lifetime across code areas. A local README, docstring, or comment fits when one code owner carries the meaning. No directory is right by itself; let these relations and the project's established shape decide.
+
+For a documentation-only request, do not invent product behavior or unrelated code changes. Still find the code, interface, setting, or operating path that owns each fact and keep the documentation connected to it.
 
 ## Choose the right carrier
 
@@ -135,7 +162,7 @@ Run the documented journey from a clean or realistic state when practical. If a 
 
 ## Keep documentation alive
 
-Change documentation with the behavior and contract it describes. Search outward from a changed source to every reader path that may now be false.
+Change documentation with the behavior and contract it describes, in the same implementation change when practical. Search outward from a changed source to every reader path that may now be false. Do not call an implementation task complete when only its documentation exists.
 
 - Update or remove old names, commands, defaults, diagrams, examples, and migration paths.
 - Keep old-version material only while it serves a supported reader, and label its state.
@@ -148,14 +175,15 @@ Delete a document when its reader need is gone or a stronger source now serves i
 
 ## Work from need to proof
 
-1. State the reader, task, starting state, result, and closest source of truth.
-2. Read the real system and map existing documents and comments that already serve or conflict with that need.
-3. Choose the smallest fitting carrier and the owner that can keep it true.
-4. Write the normal reading or action path from purpose to result. Add only needed contract, failure, recovery, and boundary detail.
-5. Trace every important claim back to code, settings, tests, behavior, or an authoritative outside source.
-6. Run the closest useful commands, examples, links, and documentation checks. Exercise a meaningful failure and recovery path when the document promises one.
-7. Read again as the target reader. Remove repeated, obvious, stale, or unsupported text.
-8. Report what changed, what was verified, and every important limit that remains.
+1. State the requested software result, reader, task, starting state, and closest source of truth.
+2. Read the owning code and the existing documentation structure. Map documents and comments that already serve or conflict with the need.
+3. For implementation work, make the behavior and its code-level checks work. Do not use documentation as its substitute.
+4. Choose the carrier and location from meaning, ownership, change, reader path, and lifetime. Keep navigation and detailed truth connected without copying facts.
+5. Write the normal reading or action path from purpose to result. Add only needed contract, failure, recovery, and boundary detail.
+6. Trace every important claim back to code, settings, tests, behavior, or an authoritative outside source.
+7. Run the closest useful software checks, commands, examples, links, and documentation checks. Exercise a meaningful failure and recovery path when the document promises one.
+8. Read again as the target reader. Remove repeated, obvious, stale, or unsupported text.
+9. Report the implemented result, changed code and documentation, checks run, and every important limit that remains.
 
 ## Check the result
 
@@ -163,6 +191,7 @@ Try to show that the documentation is wrong or unnecessary:
 
 - Can the intended reader find it without already knowing the answer?
 - Can they reach and check the result from the stated starting state?
+- Did an implementation request produce working code and behavior, not only prose?
 - Do the code, interface, behavior, and prose tell one story from whole to detail?
 - Does every important claim have a source that can keep it true?
 - Are commands and examples safe, current, and runnable as written?
@@ -170,6 +199,7 @@ Try to show that the documentation is wrong or unnecessary:
 - Do comments preserve non-obvious meaning instead of narrating code?
 - Can a change to the owning rule reveal which documentation must change?
 - Has repeated or old truth been removed?
+- Does each location make ownership, change impact, reader path, and lifetime clear?
 - Is every unverified boundary stated without hiding it?
 
 Do not call documentation complete because it is long, polished, or passes a style check. Finish when the right reader can use the real system, the system and prose agree, and the checks support the claims.
@@ -179,6 +209,8 @@ Do not call documentation complete because it is long, polished, or passes a sty
 Do not accept:
 
 - prose used to excuse unclear code or a broken interface;
+- documentation delivered instead of requested working software;
+- a location chosen by habit rather than meaning, ownership, change, reader path, and lifetime;
 - a broad overview with no real reader or task;
 - comment or docstring coverage as a goal;
 - copied facts that must drift by hand;
