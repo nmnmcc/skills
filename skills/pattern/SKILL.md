@@ -1,9 +1,28 @@
 ---
 name: pattern
-description: Distill, teach, apply, and maintain project-specific software patterns as tracked, runnable codebases under patterns/. Use when turning concrete engineering experience into a transferable teaching project; learning or applying an existing pattern; testing whether a lesson transfers; or promoting, revising, splitting, merging, or retiring a pattern. Require one standalone patterns/PATTERN-NAME/ codebase per pattern, a working reference implementation, a guided experiment, and verified commands. Never create a nested Git repository or ignore pattern code. Do not treat repeated code, a rule, recipe, decision, abstraction, example, or failure as a pattern by itself.
+description: "Gate product source-code changes with project-specific software patterns, and distill, teach, apply, and maintain those patterns as tracked, runnable codebases under patterns/. Use before writing or changing application or library implementation that ships as product source, and when creating, applying, testing, or maintaining a pattern. Check coverage first: follow every applicable candidate or established pattern; create and verify a qualified pattern before uncovered product code; and ask the user before changing or deviating from an existing pattern or when no qualified pattern can be formed. Exclude tests, scripts, configuration, migrations, generated code, and documentation examples from this source gate. Require one standalone patterns/PATTERN-NAME/ codebase per pattern with a working reference implementation, guided experiment, and verified commands."
 ---
 
 # Pattern
+
+## Gate product source code
+
+Before writing or changing product source code, find the Git repository or workspace root that owns it and inspect its `patterns/` directory. Treat a missing directory as no coverage. Do this even when the user does not mention patterns. Treat application and library implementation that ships as product source as gated. Exclude tests, scripts, configuration, migrations, generated code, and documentation examples unless the user explicitly puts them in product source.
+
+Do not edit gated source until coverage passes:
+
+1. Inspect the available pattern children and identify every one whose situation and scope may cover the work.
+2. Read each relevant README, manifest, implementation, test, and fixture in full; run its documented checks; and compare its assumptions with the current requirements, versions, settings, code, and behavior.
+3. Treat every fitting `candidate` or `established` pattern as active coverage. Follow all of their responses and boundaries. The status records evidence maturity, not permission to ignore a fitting pattern.
+4. Treat a `retired` pattern only as history or migration guidance. Follow its active replacement when it has one; otherwise continue as uncovered.
+5. When several active patterns apply, satisfy all of them. Stop and ask the user when they conflict.
+6. When no active pattern covers the work, qualify, build, and verify a pattern before editing product source. Give it `candidate` status unless it already meets the `established` standard. Then implement the product source by following it.
+
+Do not treat an unreadable pattern or a failed or unverified documented check as passing coverage. Stop and ask the user before repairing that pattern or editing the gated source.
+
+Never lower the qualification standard to clear the gate. When no honest, transferable pattern can be formed, stop before editing product source, explain the missing support, and ask the user how to proceed.
+
+Do not silently override an active pattern. Before changing any existing pattern artifact or making product source deviate from its response or boundary, give the user the pattern path, conflict, evidence, exact proposed change, and consequences, then obtain explicit approval. A user request that explicitly authorizes that exact pattern change or deviation is approval; broad permission to implement a task is not.
 
 ## Teach one relation that transfers
 
@@ -17,7 +36,7 @@ Define a pattern as one teachable relation with five parts:
 - **Consequences:** what the response enables, costs, risks, or changes.
 - **Boundary:** the conditions under which the relation changes or stops applying.
 
-Let code demonstrate the response, tests and experiments reveal its consequences and boundary, and prose help a learner recognize and adapt the relation. Current requirements, supported outside contracts, project settings, and direct evidence always override a pattern.
+Let code demonstrate the response, tests and experiments reveal its consequences and boundary, and prose help a learner recognize and adapt the relation. When current requirements, supported outside contracts, project settings, or direct evidence disagree with an active pattern, surface the conflict and ask the user instead of silently overriding either one.
 
 ## Qualify the lesson
 
@@ -61,9 +80,9 @@ Keep the first meaningful observation close. Use the project's native toolchain,
 
 ## Apply and maintain the lesson
 
-Before applying a pattern, read its README, implementation, tests, fixtures, and manifest; run its documented checks; and compare its assumptions with the current requirements, versions, settings, code, and behavior. Use a fitting `established` pattern as a default, a `candidate` as a hypothesis, and a `retired` pattern only for understanding or migration.
+Before applying a pattern, pass the product-source gate. Follow every fitting `candidate` and `established` pattern. Use a `retired` pattern only for understanding or migration.
 
-Keep code and teaching in agreement when evidence changes:
+After the user explicitly approves the exact pattern change, keep code and teaching in agreement:
 
 - narrow the situation or boundary when transfer fails;
 - split materially different relations;
@@ -71,7 +90,7 @@ Keep code and teaching in agreement when evidence changes:
 - delete a candidate whose support or reusable lesson disappears; and
 - retire an established pattern that must no longer guide new work, with its reason and replacement.
 
-Do not delay product work to extract a weak lesson or rewrite production code to improve a tutorial. Preserve unrelated user changes. For a read-only task, propose the path, status, journey, and checks without changing files.
+Do not force a weak lesson to avoid asking the user. Do not rewrite production code to improve a tutorial. Preserve unrelated user changes. For a read-only task, propose the path, status, journey, and checks without changing files.
 
 ## Reproduce the learner journey
 
@@ -86,6 +105,6 @@ From a clean checkout or equivalent clean worktree:
 
 If a clean run is not possible in the current environment, state exactly which step remains unverified and why. Never describe a codebase as runnable based only on reading its code.
 
-Report the `patterns/<pattern-name>/` path, status, learner commands, verification results, tracked-file check, and remaining platform or dependency limits. When the task is read-only, do not create or change a codebase; report the proposed child name, status, teaching journey, and required checks instead.
+Report the coverage decision, every applicable pattern, any user approval, and every created or changed pattern's `patterns/<pattern-name>/` path, status, learner commands, verification results, tracked-file check, and remaining platform or dependency limits. When the task is read-only, do not create or change a codebase; report the proposed child name, status, teaching journey, and required checks instead.
 
-Finish when one tracked, standalone codebase under `patterns/` teaches one qualified relation, works from a clean state, and has code, prose, status, and evidence in agreement.
+Finish when every product-source change is covered by and follows all active patterns, every approved pattern change is verified, and each created or changed codebase under `patterns/` teaches one qualified relation with code, prose, status, and evidence in agreement.

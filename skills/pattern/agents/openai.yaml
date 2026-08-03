@@ -1,4 +1,4 @@
 interface:
   display_name: "Pattern"
-  short_description: "Build tracked, runnable pattern codebases under patterns/."
-  default_prompt: "Use $pattern to turn a recurring engineering lesson into a tracked, standalone codebase at patterns/<pattern-name>/."
+  short_description: "Gate product source code with runnable project patterns."
+  default_prompt: "Use $pattern to check project pattern coverage before changing product source code, create a qualified pattern when needed, and follow every applicable active pattern."
