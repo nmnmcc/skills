@@ -1,6 +1,6 @@
 # Agent Work Skills
 
-This repository has thirteen skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
+This repository has fourteen skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
 
 ## Skills
 
@@ -8,11 +8,15 @@ This repository has thirteen skills for AI agents. It works with [skills.sh](htt
 
 - `study` starts with one working attitude: study deeply before anything. It learns the real object, context, evidence, alternatives, and risks before answering or acting, then keeps learning from the result.
 
+### Deliberation
+
+- `debate` lets the main agent and one independent subagent form their own views, exchange evidence, and resolve a meaningful choice before action. Neither agent has a fixed side. The main agent acts when the decision is resolved and asks the user when a material difference remains.
+
 ### Default action
 
 - `just-do-it` turns clear intent into joyful, responsible action. Use it in any scenario and at every stage to keep work moving toward a finished result.
 
-Use them as one loop: study deeply enough to earn the next move, act when it is clear and safe enough, and study what the result teaches.
+Use them as one loop: study deeply enough to earn the next move, debate when another independent view can change an important choice, act when the choice is clear and safe enough, and study what the result teaches.
 
 ### Product experience
 
@@ -49,6 +53,7 @@ Use an engineering domain skill with `study`, `just-do-it`, and the needed engin
 .
 |-- skills/
 |   |-- study/
+|   |-- debate/
 |   |-- just-do-it/
 |   |-- ux/
 |   |-- dx/
@@ -80,6 +85,7 @@ Install one skill:
 
 ```bash
 npx skills add nmnmcc/skills --skill study
+npx skills add nmnmcc/skills --skill debate
 npx skills add nmnmcc/skills --skill just-do-it
 npx skills add nmnmcc/skills --skill ux
 npx skills add nmnmcc/skills --skill dx
@@ -141,8 +147,8 @@ npx skills add . --list
 ## Release checks
 
 - `devenv test` passes with the official `skills-ref` validator.
-- `npx skills add . --list` finds all thirteen skills.
-- `skills.sh.json` is valid and lists all thirteen skill names once.
+- `npx skills add . --list` finds all fourteen skills.
+- `skills.sh.json` is valid and lists all fourteen skill names once.
 - The install commands use the published repository name.
 
 ## License
