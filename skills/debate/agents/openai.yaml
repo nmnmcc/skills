@@ -1,4 +1,0 @@
-interface:
-  display_name: "Debate"
-  short_description: "Think with one subagent, resolve the choice, then act."
-  default_prompt: "Use $debate to think through this meaningful choice with one independent Codex subagent, then act on the resolved decision."

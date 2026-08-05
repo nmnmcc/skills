@@ -8,11 +8,6 @@
       "skills": ["study"]
     },
     {
-      "title": "Deliberation",
-      "description": "Use one independent subagent to improve a meaningful decision before action.",
-      "skills": ["debate"]
-    },
-    {
       "title": "Default Action",
       "description": "A joyful default for turning clear intent into responsible action and a finished result.",
       "skills": ["just-do-it"]
