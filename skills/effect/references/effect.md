@@ -1,5 +1,25 @@
 # Effect
 
+## Respect Effect as a whole programming system
+
+Effect is not a utility library added to an ordinary TypeScript program. It is a complete programming model, runtime, standard library, and ecosystem. Once Effect owns a program, let its model control effects, requirements, errors, resources, state, time, concurrency, streams, data at boundaries, observability, and execution from end to end.
+
+The ecosystem is much larger than the `Effect` type. Its public language includes services and `Context`, `Layer`, `Scope`, typed errors and causes, `Schedule`, `Stream`, fibers, queues, shared state and transactions, `Schema`, platform support, and focused `@effect/*` integrations. Treat these names as a map, not as a fixed or complete package list. Find the exact public modules and names in the installed version before using them.
+
+Do not bring uncontrolled TypeScript habits into Effect code merely because they are common or familiar:
+
+- Do not use `Promise`, `async` / `await`, callbacks, or event handlers as the main control model and wrap the result in Effect afterward. Describe and compose the work in Effect. Use the installed public Effect adapter for a foreign API at one narrow edge.
+- Do not use thrown exceptions, broad `try` / `catch`, rejected promises, or an untyped `Error` as the normal model for expected failure. Keep expected failures in the typed error channel and keep defects distinct.
+- Do not use global singletons, hidden mutable modules, or hand-built dependency injection when services, `Context`, and `Layer` can express the requirement and its construction.
+- Do not use `try` / `finally`, manual close calls, or process-lifetime objects to manage a resource that `Scope` and Effect resource operators can own.
+- Do not use raw timers, sleep promises, retry loops, or ad hoc polling when Effect time, `Clock`, and `Schedule` can express the policy and make it testable.
+- Do not use `Promise.all`, fire-and-forget promises, detached tasks, or host-language cancellation as substitutes for fibers and Effect's structured concurrency.
+- Do not use loose event emitters or unowned mutable variables when the installed Effect model provides coordination, shared state, or transaction forms with the required meaning.
+- Do not let unchecked boundary data spread through the program when the installed Schema model can decode, validate, transform, and encode it with its failures kept visible.
+- Do not build local logging, tracing, metrics, platform, HTTP, RPC, persistence, or other integration frameworks before checking the relevant installed and official `@effect/*` packages.
+
+This rule does not mean installing every Effect package. It means using the part of the ecosystem that owns the need, following project and installed-version evidence, and refusing to recreate that part with ordinary TypeScript by default. Familiarity with a host-language technique is never proof that an Effect-native construction is missing.
+
 ## Think in Effect
 
 Treat Effect as the language of the whole program, not as a tool used in a few places.
@@ -18,7 +38,7 @@ Start from the meaning of the work. Ask:
 
 Build every capability that Effect can express inside Effect from the start. Do not first control the work with Promises, callbacks, host-language effects, or runtime calls and wrap it later. Pure values and calculations may remain plain only when they own no effect, resource, lifetime, or running work.
 
-Treat any direct Promise or callback execution, host API, raw resource, unmanaged task, or inner runtime call that bypasses Effect as an escape hatch. Use one only after the exact installed public API, source, and tests show that no supported Effect construction can meet the need.
+Contact with a foreign API through an installed public Effect adapter is an integration boundary, not an escape hatch. An escape hatch is a direct Promise, callback, host API, raw resource, unmanaged task, or inner runtime operation that controls work outside Effect or bypasses an Effect-native adapter. Use one only after the exact installed public API, source, and tests show that no supported Effect construction can meet the need.
 
 Before adding, expanding, or relying on an escape hatch, show the user why Effect-native paths fail, name the exact boundary and risks, describe the adapter contract, and get explicit approval for that boundary. Silence, a broad request, or existing code is not approval. Without approval, do not implement it. If approved, isolate the smallest adapter, model success, error, defect, interruption, and cleanup, then return to Effect at once.
 
@@ -67,15 +87,15 @@ Give each source its proper role: the public surface defines supported use, impl
 
 Do not stop at the first API that compiles. Confirm that its meaning, type behavior, runtime behavior, interruption behavior, and place in the complete program all fit the need.
 
-## Use the whole Effect language
+## Use the whole Effect ecosystem
 
-Before inventing a helper, wrapper, local protocol, or new dependency, search the complete public Effect source for an existing expression of the same idea.
+Before inventing a helper, wrapper, local protocol, or new dependency, search the complete public Effect source and the relevant official `@effect/*` packages for an existing expression of the same idea.
 
-Prefer the library's own composition, service, layer, scope, error, schedule, stream, and concurrency models when they preserve the needed meaning. Exhaust the public Effect model before proposing an escape hatch. Keep success, error, and requirements honest. Do not provide requirements too early, erase useful errors, hide defects, detach fibers, or run inner effects merely to make a local type easier.
+Prefer the ecosystem's own composition, service, layer, scope, schema, error, schedule, stream, state, concurrency, platform, and observability models when they preserve the needed meaning. Exhaust the relevant public Effect model before proposing an escape hatch. Keep success, error, and requirements honest. Do not provide requirements too early, erase useful errors, hide defects, detach fibers, or run inner effects merely to make a local type easier.
 
 Use existing project patterns when they agree with the exact source and keep the full model intact. Repair or replace a stale pattern when the installed version gives a clearer or safer expression.
 
-Do not reduce Effect to the small part already familiar to you. Each unfamiliar need is a reason to study the source, widen the map, and learn how that part belongs to the rest of the system.
+Do not reduce Effect to the small part already familiar to you. Do not let common TypeScript practice overrule an unfamiliar Effect design. Each unfamiliar need is a reason to study the ecosystem, widen the map, and learn how that part belongs to the rest of the system.
 
 ## Prove and teach the result
 
