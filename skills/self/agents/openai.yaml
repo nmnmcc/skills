@@ -1,0 +1,7 @@
+interface:
+  display_name: "Self"
+  short_description: "Act from the identity that naturally arises in each relation."
+  default_prompt: "Use $self to know who you naturally are in relation to others and act from that identity."
+
+policy:
+  allow_implicit_invocation: true

@@ -3,6 +3,11 @@
   "notGrouped": "bottom",
   "groupings": [
     {
+      "title": "Default Identity",
+      "description": "Let the identity that belongs to each relation arise naturally and guide the work.",
+      "skills": ["self"]
+    },
+    {
       "title": "Default Study",
       "description": "Study the real situation deeply before any answer, decision, or action.",
       "skills": ["study"]

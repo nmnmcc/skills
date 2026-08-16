@@ -1,8 +1,12 @@
 # Agent Work Skills
 
-This repository has 13 skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
+This repository has 14 skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
 
 ## Skills
+
+### Default identity
+
+- `self` treats identity as the natural awareness of who the agent is relative to the people, agents, systems, work, and result around it. One self can hold several identities at once; each relation brings the fitting identity, care, responsibility, and authority to the foreground without turning them into a ritual.
 
 ### Default study
 
@@ -12,7 +16,7 @@ This repository has 13 skills for AI agents. It works with [skills.sh](https://s
 
 - `just-do-it` turns clear intent into joyful, responsible action. Use it in any scenario and at every stage to keep work moving toward a finished result. Along the way, it welcomes useful help from people and subagents while keeping responsibility with the agent that owns the result.
 
-Use them as one loop: study deeply enough to earn the next move, act when the path is clear and safe enough, and study what the result teaches.
+Use the three defaults as one movement: let the fitting identity arise from the present relation, study deeply enough to earn the next move, act when the path is clear and safe enough, and let identity or understanding move naturally when the situation changes.
 
 ### Product experience
 
@@ -30,7 +34,7 @@ Choose the smallest view that can set and prove correctness. Choose by where you
 - `line` starts from one shared rule: What must be true across one technical domain, and where can parts move away from it?
 - `plane` follows the full path: Can meaning and guarantees pass through every boundary and every old-and-new release state?
 
-Use `study` first to learn the real system and choose the relevant engineering view. Use `just-do-it` to keep the work moving. Use the views together inside one process, not as repeated work: plane sets the end result, line keeps shared rules true, and point finds local causes.
+Use `self` to stay aware of who you are in each relation. Use `study` to learn the real system and choose the relevant engineering view. Use `just-do-it` to keep the work moving. Use the views together inside one process, not as repeated work: plane sets the end result, line keeps shared rules true, and point finds local causes.
 
 ### Engineering domains
 
@@ -41,13 +45,14 @@ Use `study` first to learn the real system and choose the relevant engineering v
 - `pattern` gates product source code with standalone, runnable project patterns under `patterns/`. Before changing shipped application or library implementation, an agent checks and follows every fitting candidate or established pattern. If coverage is missing, it creates and verifies a qualified pattern first; if no pattern can qualify or an existing pattern must change, it asks the user before coding. Tests, scripts, configuration, migrations, generated code, and documentation examples stay outside this gate. Each tracked `patterns/<pattern-name>/` child teaches one transferable relation through a working reference implementation, verified commands, and a guided experiment.
 - `testing` writes maintainable tests for observable behavior through the smallest useful runtime boundary.
 
-Use an engineering domain skill with `study`, `just-do-it`, and the needed engineering view. Study learns the real situation, the domain skill gives the specialized rules, and `point`, `line`, or `plane` gives the shape of the work.
+Use an engineering domain skill with `self`, `study`, `just-do-it`, and the needed engineering view. Self keeps identity natural to each relation, study learns the real situation, the domain skill gives the specialized rules, and `point`, `line`, or `plane` gives the shape of the work.
 
 ## Structure
 
 ```text
 .
 |-- skills/
+|   |-- self/
 |   |-- study/
 |   |-- just-do-it/
 |   |-- ux/
@@ -79,6 +84,7 @@ npx skills add nmnmcc/skills
 Install one skill:
 
 ```bash
+npx skills add nmnmcc/skills --skill self
 npx skills add nmnmcc/skills --skill study
 npx skills add nmnmcc/skills --skill just-do-it
 npx skills add nmnmcc/skills --skill ux
@@ -141,8 +147,8 @@ npx skills add . --list
 ## Release checks
 
 - `devenv test` passes with the official `skills-ref` validator.
-- `npx skills add . --list` finds all 13 skills.
-- `skills.sh.json` is valid and lists all 13 skill names once.
+- `npx skills add . --list` finds all 14 skills.
+- `skills.sh.json` is valid and lists all 14 skill names once.
 - The install commands use the published repository name.
 
 ## License
