@@ -1,0 +1,7 @@
+interface:
+  display_name: "Nobody Cares How"
+  short_description: "Reject technical showboating in the user experience."
+  default_prompt: "Use $nobody-cares-how to kill technical showboating, keep the machinery backstage, and treat the product audience with respect."
+
+policy:
+  allow_implicit_invocation: true

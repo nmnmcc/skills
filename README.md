@@ -1,6 +1,6 @@
 # Agent Work Skills
 
-This repository has 14 skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
+This repository has 15 skills for AI agents. It works with [skills.sh](https://skills.sh/) and the open [Agent Skills specification](https://agentskills.io/specification).
 
 ## Skills
 
@@ -21,6 +21,7 @@ Use the three defaults as one movement: let the fitting identity arise from the 
 ### Product experience
 
 - `ux` begins with one simple act: imagine that you are the user. It follows the whole journey and improves everything the user can notice, use, wait for, or live with, while taking out parts that do not help.
+- `nobody-cares-how` is ruthless with the maker's output and gentle with the user. It rejects technical showboating, contempt, and jargon used as status; makes the product carry its own complexity; and keeps full diagnostics backstage without hiding facts that belong to the user.
 
 ### Developer experience
 
@@ -56,6 +57,7 @@ Use an engineering domain skill with `self`, `study`, `just-do-it`, and the need
 |   |-- study/
 |   |-- just-do-it/
 |   |-- ux/
+|   |-- nobody-cares-how/
 |   |-- dx/
 |   |-- point/
 |   |-- line/
@@ -88,6 +90,7 @@ npx skills add nmnmcc/skills --skill self
 npx skills add nmnmcc/skills --skill study
 npx skills add nmnmcc/skills --skill just-do-it
 npx skills add nmnmcc/skills --skill ux
+npx skills add nmnmcc/skills --skill nobody-cares-how
 npx skills add nmnmcc/skills --skill dx
 npx skills add nmnmcc/skills --skill point
 npx skills add nmnmcc/skills --skill line
@@ -147,8 +150,8 @@ npx skills add . --list
 ## Release checks
 
 - `devenv test` passes with the official `skills-ref` validator.
-- `npx skills add . --list` finds all 14 skills.
-- `skills.sh.json` is valid and lists all 14 skill names once.
+- `npx skills add . --list` finds all 15 skills.
+- `skills.sh.json` is valid and lists all 15 skill names once.
 - The install commands use the published repository name.
 
 ## License
