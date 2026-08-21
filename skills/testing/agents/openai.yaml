@@ -1,4 +1,4 @@
 interface:
   display_name: "Testing"
-  short_description: "Test observable behavior through real runtime boundaries."
-  default_prompt: "Use $testing to write maintainable tests for observable runtime behavior."
+  short_description: "Seek evidence that distinguishes credible software faults."
+  default_prompt: "Use $testing to decide what evidence is needed and add tests only when they can distinguish required behavior from a credible fault."
