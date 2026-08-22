@@ -1,4 +1,4 @@
 interface:
   display_name: "Effect"
-  short_description: "Make effects and execution boundaries explicit."
-  default_prompt: "Use $effect to keep supported work inside the project's effect system, and ask for my explicit approval before any unavoidable non-effectful escape hatch."
+  short_description: "Make every effect model and boundary explicit."
+  default_prompt: "Use $effect to keep the project's effect model and execution boundaries explicit, and ask for my approval before any unavoidable escape hatch."

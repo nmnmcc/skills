@@ -1,13 +1,15 @@
 ---
 name: effect
-description: "Use effect-aware thinking whenever designing, writing, changing, reviewing, or debugging code. Make observable work, dependencies, failures, state changes, resource lifetimes, concurrency, cancellation, and execution boundaries explicit. Follow the project's existing tools, use the matching guide for Effect, Cats Effect 3, or ZIO, learn the exact public API when a library is involved, keep meaning intact from design through execution, and verify the real behavior. When an effect system owns the work, keep every supported capability inside it and require the user's explicit approval before any unavoidable non-effectful escape hatch."
+description: "Use effect-aware thinking whenever designing, writing, changing, reviewing, or debugging code. Make computational effects, dependencies, failures, state changes, control flow, resource lifetimes, concurrency, cancellation, and execution boundaries explicit, including algebraic operations and handlers when present. Follow the project's existing tools, use the matching guide for Algebraic Effects, Effect, Cats Effect 3, or ZIO, learn the exact public API when a system is involved, keep meaning intact from design through execution, and verify the real behavior. When an effect system owns the work, keep every supported capability inside it and require the user's explicit approval before any unavoidable escape hatch."
 ---
 
 # Effect
 
 ## Make effects explicit
 
-An **effect** is work that changes or depends on something outside a returned plain value. It may read or write data, use time or random values, change state, fail, start work, wait, use a resource, or contact another system.
+A **computational effect** is behavior that a returned plain value alone does not fully describe. It may read or write data, use time or random values, change state, fail, branch, suspend, transfer control, resume work, use a resource, or contact another system.
+
+In an algebraic effect system, a computation may request a named operation whose meaning is supplied by a handler. Such an operation may express control, state, failure, or another behavior without contacting anything outside the program. Do not assume that an effect library, an effect type, and an algebraic effect handler are the same mechanism. Learn what the project means by each term.
 
 Make each important effect visible in the form that the project can support. This may be a type, value, return result, exception, function signature, interface, dependency, runtime contract, or clear control-flow boundary.
 
@@ -15,7 +17,7 @@ Do not assume that every effect needs a special library or type. Do not hide imp
 
 Start from the meaning of the work. Ask:
 
-- What work can be seen outside this operation?
+- What behavior cannot be understood from the returned value alone?
 - Which inputs, services, state, and outside systems does it need?
 - What can succeed, return no value, refuse, fail, or stop early?
 - Which state can change, and who owns that change?
@@ -30,7 +32,7 @@ Keep plain calculations plain. Keep effects clear where they enter, compose, and
 
 When an explicit effect system owns a part of the program, use it for every behavior and integration that it can express. Build in the system from the start instead of first controlling the work with host-language effects and wrapping it later. A pure value or calculation may remain plain only when it owns no effect, resource, lifetime, or running work.
 
-An **escape hatch** is any direct host-language, foreign-library, runtime, or unsafe operation that bypasses the effect system and must be adapted back into it. Treat an escape hatch as a last resort, not a convenience.
+An **escape hatch** is a direct host-language, foreign-library, runtime, or unsafe operation that bypasses guarantees owned by the effect system and must be adapted back into it. In an algebraic effect system, supported operation declarations, requests, forwarding, handlers, legal resumptions, interpreters, and owned execution boundaries are not escape hatches merely because they give effects their meaning. Treat a real bypass as a last resort, not a convenience.
 
 Before adding, expanding, or relying on an escape hatch:
 
@@ -60,22 +62,23 @@ If the project has no effect library, use its normal language and framework tool
 
 If exact source cannot be reached, say what evidence is available and what remains uncertain. Do not hide the gap with a fixed recipe.
 
-## Load the matching library guide
+## Load the matching system guide
 
-Read the guide for the library that owns the work before choosing APIs:
+Read the guide for the system that owns the work before choosing APIs:
 
+- For language-native algebraic effect operations and handlers, a system that calls algebraic effects abilities, or an explicit free, freer, or extensible-effect encoding, read [Algebraic Effects](references/algebraic-effects.md) completely.
 - For the TypeScript `effect` package or `@effect/*` modules, read [Effect](references/effect.md) completely.
 - For Scala Cats Effect 3 and its official modules, read [Cats Effect](references/cats-effect.md) completely.
 - For Scala ZIO and its modules, read [ZIO](references/zio.md) completely.
 
-Load only the guide that applies to the current part. If different parts use more than one library, apply each guide only at the boundary it owns. For Cats Effect 2 or another effect system, follow this main workflow and inspect that system's exact public sources instead of treating another guide as a fixed recipe.
+The TypeScript package named `effect`, Cats Effect, and ZIO are not algebraic effect handler systems merely because their names or types contain the word effect. Load only the guide that matches the mechanism in the current part. If different parts use more than one system, apply each guide only at the boundary it owns. For Cats Effect 2 or another effect system, follow this main workflow and inspect that system's exact public sources instead of treating another guide as a fixed recipe.
 
 ## Carry the model through the whole workflow
 
 Use one effect model from the first question to the final proof:
 
 1. Study the real need and current program.
-2. State the observable work, dependencies, results, failures, state changes, lifetimes, and execution boundary.
+2. State the computational behavior, dependencies, results, failures, state changes, control flow, lifetimes, and execution boundary. Include operations and handlers when the mechanism provides them.
 3. Choose the existing project forms that express those facts.
 4. Build the operation so each step keeps the facts visible that later code must handle.
 5. Join it to the rest of the program without changing its meaning at a boundary.
@@ -95,6 +98,7 @@ For every important operation, show the facts that callers need:
 - **State:** what may change, who owns it, and what other work may observe.
 - **Resources:** how acquisition, use, cleanup, and partial failure fit together.
 - **Time and concurrency:** delay, timeout, retry, cancellation, ordering, and ownership of work.
+- **Algebraic control, when present:** requested operations, handler scope and order, forwarding, residual effects, and whether suspended work may stop or resume once or more than once.
 - **Execution:** the point where prepared work actually starts and where its outcome is observed.
 
 Use the strongest clear form the project already supports:
